@@ -1,0 +1,21 @@
+{
+  "headers": [
+    {
+      "source": "/(.*).jsonp",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "text/javascript"
+        }
+      ]
+    },{
+      "source": "/(.*).jsn",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "application/json"
+        }
+      ]
+    }
+  ]
+}
