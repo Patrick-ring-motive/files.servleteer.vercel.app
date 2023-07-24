@@ -1,5 +1,5 @@
 void async function Main() {
-  await import('/public/js/import/web-gpt-3.js');
+  await import('https://files-servleteer.vercel.app/bankgpt/public/js/import/web-gpt-3.js');
   const Ж = 'Ж';
 
 
