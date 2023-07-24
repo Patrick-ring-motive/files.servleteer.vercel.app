@@ -16,6 +16,30 @@
           "value" : "application/json"
         }
       ]
+    },{
+      "source": "/(.*).js",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "text/javascript"
+        }
+      ]
+    },{
+      "source": "/(.*).css",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "text/css"
+        }
+      ]
+    },{
+      "source": "/(.*).html",
+      "headers" : [
+        {
+          "key" : "Content-Type",
+          "value" : "text/html"
+        }
+      ]
     }
   ]
 }
