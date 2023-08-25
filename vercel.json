@@ -6,6 +6,10 @@
         {
           "key" : "Content-Type",
           "value" : "text/javascript"
+        },
+        {
+          "key" : "Access-Control-Allow-Origin",
+          "value" : "*"
         }
       ]
     },{
@@ -22,6 +26,10 @@
         {
           "key" : "Content-Type",
           "value" : "text/javascript"
+        },
+        {
+          "key" : "Access-Control-Allow-Origin",
+          "value" : "*"
         }
       ]
     },{
@@ -30,6 +38,10 @@
         {
           "key" : "Content-Type",
           "value" : "text/css"
+        },
+        {
+          "key" : "Access-Control-Allow-Origin",
+          "value" : "*"
         }
       ]
     },{
@@ -38,12 +50,12 @@
         {
           "key" : "Content-Type",
           "value" : "text/html"
+        },
+        {
+          "key" : "Access-Control-Allow-Origin",
+          "value" : "*"
         }
       ]
-    },
-    {
-      "key" : "Access-Control-Allow-Origin",
-      "value" : "*"
     }
   ]
 }
