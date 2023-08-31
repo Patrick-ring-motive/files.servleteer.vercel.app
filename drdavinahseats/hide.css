@@ -26,7 +26,8 @@ img[alt="Love From The oven"],
 .seva-form,
 [class*="related-posts"],
 .trending-content,
-.instagram-content
+.instagram-content,
+[id="dpsp-floating-sidebar"]
 {
    display: none !important;
    visibility: hidden !important;
