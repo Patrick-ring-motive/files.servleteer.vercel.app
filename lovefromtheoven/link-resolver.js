@@ -1,120 +1,214 @@
+void async function LinkResolverModule(){
+  globalThis.replaceHost=new URL(document.querySelector('meta[property="og:url"]').getAttribute('content')).host;
 
-void async function LinkResolver() {
+  await import('/x.js');
 
+void async function HTMLLinkResolver() {
+if(!globalThis.window){return;}
+  
 
   const hostProxy = window.location.host;
-  const hostList = JSON.parse(atob(document.currentScript.getAttribute('host-list')));
+  let hostList = Q(U=>JSON.parse(atob(document.currentScript.getAttribute('host-list'))))||[];
+  hostList.push(globalThis.replaceHost);
+  let hostListRegex = [];
+
   const hostList_length = hostList.length;
   let hostListQuery = 'hostListQuery';
+    
+  for(let i=0;i<hostList_length;i++){
+     hostListRegex.push(new RegExp(hostList[i], "gi"));
+  }
 
   setInterval(async function() {
 
-    let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="../"]');
-    const relativeLinks_length = relativeLinks.length;
-    for (let i = 0; i < relativeLinks_length; i++) {
-      try {
+    relativeTagsFix('href');
+    relativeTagsFix('src');
 
-        relativeLinks[i].setAttribute('href', relativeLinks[i].href);
+    proxyTagsFix('href');
+    proxyTagsFix('action');
+    //proxyTagsFix('src');
+    proxyTagsFix('data-src');
+    proxyTagsFix('style');
+    //proxyTagsFix('srcset');
+    proxyTagsFix('data-srcset');
+      
 
-      } catch (e) { continue; }
-    }
-    let relativeSrc = document.querySelectorAll('[src^="/"],[src^="./"],[src^="../"]');
-    const relativeSrc_length = relativeSrc.length;
-    for (let i = 0; i < relativeSrc_length; i++) {
-      try {
+    httpsForce('href');
+    httpsForce('src');
+    httpsForce('data-src');
+    httpsForce('style');
+    httpsForce('srcset');
+    httpsForce('data-srcset');
+      
+      styleTagsFix();
 
-        relativeSrc[i].setAttribute('src', relativeSrc[i].src);
-
-      } catch (e) { continue; }
-    }
-
-    hostListQuery = 'hostListQuery';
-    for (let i = 0; i < hostList_length; i++) {
-      hostListQuery = hostListQuery + ',' + `a[href*="/` + hostList[i] + `"]`;
-      hostListQuery = hostListQuery + ',' + `a[href*="/www.` + hostList[i] + `"]`;
-    }
-    const href_list = document.querySelectorAll(hostListQuery);
-    const href_list_length = href_list.length;
-
-    for (let i = 0; i < hostList_length; i++) {
-      for (let x = 0; x < href_list_length; x++) {
-        try {
-          href_list[x].href = href_list[x].href.replaceAll(hostList[i], hostProxy);
-        } catch (e) { continue; }
-      }
-    }
-
-    hostListQuery = 'hostListQuery';
-    for (let i = 0; i < hostList_length; i++) {
-      hostListQuery = hostListQuery + ',' + `[src*="/` + hostList[i] + `"]`;
-      hostListQuery = hostListQuery + ',' + `[src*="/www.` + hostList[i] + `"]`;
-    }
-    const src_list = document.querySelectorAll(hostListQuery);
-    const src_list_length = src_list.length;
-
-    for (let i = 0; i < hostList_length; i++) {
-      for (let x = 0; x < src_list_length; x++) {
-        try {
-          src_list[x].src = src_list[x].src.replaceAll(hostList[i], hostProxy);
-        } catch (e) { continue; }
-      }
-    }
-
-
-
-    hostListQuery = 'hostListQuery';
-    for (let i = 0; i < hostList_length; i++) {
-      hostListQuery = hostListQuery + ',' + `[data-src*="/` + hostList[i] + `"]`;
-      hostListQuery = hostListQuery + ',' + `[data-src*="/www.` + hostList[i] + `"]`;
-    }
-    const data_src_list = document.querySelectorAll(hostListQuery);
-    const data_src_list_length = data_src_list.length;
-
-    for (let i = 0; i < hostList_length; i++) {
-      for (let x = 0; x < data_src_list_length; x++) {
-        try {
-          data_src_list[x].setAttribute('data-src', data_src_list[x].getAttribute('data-src').replaceAll(hostList[i], hostProxy));
-        } catch (e) { continue; }
-      }
-    }
-
-
-    hostListQuery = 'hostListQuery';
-    for (let i = 0; i < hostList_length; i++) {
-      hostListQuery = hostListQuery + ',' + `[style*="/` + hostList[i] + `"]`;
-      hostListQuery = hostListQuery + ',' + `[style*="/www.` + hostList[i] + `"]`;
-    }
-    const style_list = document.querySelectorAll(hostListQuery);
-    const style_list_length = style_list.length;
-
-    for (let i = 0; i < hostList_length; i++) {
-      for (let x = 0; x < style_list_length; x++) {
-        try {
-          style_list[x].setAttribute('style', style_list[x].getAttribute('style').replaceAll('/' + hostList[i], '/' + hostProxy));
-
-        } catch (e) { continue; }
-      }
-    }
-
-
-    let hrefHttp = document.querySelectorAll('[href^="http://"]');
-    const hrefHttp_length=hrefHttp.length;
-    for(let i=0;i<hrefHttp_length;i++){try{
-      hrefHttp[i].setAttribute('href',hrefHttp[i].replace('http://','https://'));
-    }catch(e){continue;}}
-    
-    let srcHttp = document.querySelectorAll('[src^="http://"]');
-    const srcHttp_length=srcHttp.length;
-    for(let i=0;i<srcHttp_length;i++){try{
-      srcHttp[i].setAttribute('src',srcHttp[i].replace('http://','https://'));
-    }catch(e){continue;}}
-    
+      
   }, 100);
 
 
 
+function relativeTagsFix(attr){
+
+    let relativeTags = document.querySelectorAll('['+attr+'^="/"],['+attr+'^="./"],['+attr+'^="../"],['+attr+']:not(['+attr+'*=":"])');
+    const relativeTags_length = relativeTags.length;
+    for (let i = 0; i < relativeTags_length; i++) {
+     try {
+
+        relativeTags[i].setAttribute(attr, relativeTags[i][attr]);
+
+     } catch (e) { continue; }
+    }
+
+}
+    
+function proxyTagsFix(attr){
+
+    hostListQuery = 'hostListQuery';
+    for (let i = 0; i < hostList_length; i++) {
+      hostListQuery = hostListQuery + ',' + `[`+attr+`*="/` + hostList[i] + `" i]:not([`+attr+`^="blob:"])`;
+      hostListQuery = hostListQuery + ',' + `[`+attr+`*="/www.` + hostList[i] + `" i]`;
+    }
+    const attr_list = document.querySelectorAll(hostListQuery);
+    const attr_list_length = attr_list.length;
+
+    for (let i = 0; i < hostList_length; i++) {
+      for (let x = 0; x < attr_list_length; x++) {
+        try {
+          attr_list[x].setAttribute(attr, attr_list[x].getAttribute(attr).replace(hostListRegex[i], hostProxy));
+        } catch (e) { continue; }
+      }
+    }
+
+}
+
+function styleTagsFix(){
+const styleTags = document.querySelectorAll('style:not([url-rewritten])');
+const styleTags_length = styleTags.length;
+    for (let i = 0; i < hostList_length; i++) {
+      for (let x = 0; x < styleTags_length; x++) {
+        try {
+          styleTags[x].setAttribute('url-rewritten','false');
+          if(styleTags[x].textContent.toLowerCase().includes(hostProxy+'/')){
+               styleTags[x].textContent = styleTags[x].textContent.replace(hostListRegex[i], hostProxy);
+               styleTags[x].setAttribute('url-rewritten','true');
+            }
+        } catch (e) { continue; }
+      }
+    }
 
 
+}
+    
+function httpsForce(attr){
+      let hrefHttp = document.querySelectorAll('['+attr+'*="http://"]');
+    const hrefHttp_length=hrefHttp.length;
+    for(let i=0;i<hrefHttp_length;i++){try{
+      hrefHttp[i].setAttribute(attr,hrefHttp[i].replace('http://','https://'));
+    }catch(e){continue;}}
+}
 
 
 }?.();
+
+
+void async function fetchResolver(){
+if(!globalThis.window){return;}
+
+
+
+let replaceHost = globalThis.replaceHost;
+
+globalThis.nativeFetch = globalThis.fetch;
+
+globalThis.customFetch = async function(request, headers) {
+
+  let req;
+  let response;
+  if (typeof request == 'string') {
+    request = request.replaceAll(replaceHost, window.location.host);
+    req = new Request(request, headers);
+    response = await window.nativeFetch(req);
+    response.requestInputObject = req;
+  } else {
+    response = await window.nativeFetch(request, headers);
+  }
+  if (typeof request == 'object') {
+
+    response.requestInputObject = request;
+
+  } else {
+
+    response.requestInputURL = request;
+    response.requestInputObject = req;
+
+  }
+
+  if (headers) { response.requestInputHeaders = headers; }
+
+  return response;
+
+}
+globalThis.fetch = globalThis.customFetch;
+
+  
+}?.();
+
+
+void async function xhrResolver(){
+if(!globalThis.window){return;}
+
+
+
+
+let rH = globalThis.replaceHost;
+if(!XMLHttpRequest.nativeOpen){
+XMLHttpRequest.prototype.nativeOpen = XMLHttpRequest.prototype.open;
+
+XMLHttpRequest.prototype.customOpen = function(method, url, asynch, user, password) {
+  url = url.replaceAll(rH, window.location.host);
+
+  this.method = method;
+  this.requestURL = url;
+  this.asynch = asynch;
+  if (user) { this.user = user; }
+  if (password) { this.password = password; }
+  this.requestHeaders = new Map();
+
+  return this.nativeOpen(method, url, asynch, user, password);
+
+}
+
+XMLHttpRequest.prototype.open = XMLHttpRequest.prototype.customOpen;
+
+
+
+/*//////////////////////////////////////////////////////////////////////////*/
+
+
+XMLHttpRequest.nativeOpen = XMLHttpRequest.open;
+
+XMLHttpRequest.customOpen = function(method, url, asynch, user, password) {
+  url = url.replaceAll(rH, window.location.host);
+  this.method = method;
+  this.requestURL = url;
+  this.asynch = asynch;
+  if (user) { this.user = user; }
+  if (password) { this.password = password; }
+  this.requestHeaders = new Map();
+
+  return this.nativeOpen(method, url, asynch, user, password);
+
+}
+
+XMLHttpRequest.open = XMLHttpRequest.customOpen;
+  
+}
+
+
+
+  
+}?.();
+
+}?.();
+
+
