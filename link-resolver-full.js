@@ -1,7 +1,8 @@
 void async function LinkResolverModule(){
-  globalThis.replaceHost=new URL(document.querySelector('meta[property="og:url"]').getAttribute('content')).host;
-
+  
   await import('https://files-servleteer.vercel.app/x.js');
+
+  globalThis.replaceHost=Q(U=>new URL(document.querySelector('meta[property="og:url"]')?.getAttribute?.('content'))?.host);
 
 void async function HTMLLinkResolver() {
 if(!globalThis.window){return;}
@@ -9,7 +10,7 @@ if(!globalThis.window){return;}
 
   const hostProxy = window.location.host;
   let hostList = Q(U=>JSON.parse(atob(document.currentScript.getAttribute('host-list'))))||[];
-  hostList.push(globalThis.replaceHost);
+  if(globalThis.replaceHost){hostList.push(globalThis.replaceHost);}
   let hostListRegex = [];
 
   const hostList_length = hostList.length;
