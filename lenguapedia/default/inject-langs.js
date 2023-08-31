@@ -7,7 +7,7 @@ void async function InjectLangs(){
    
     let hrefs = document.querySelectorAll('[href]:not([href*="langs="])');
     let uselang='';
-    if(window.location.href.includes('uselang'){
+    if(window.location.href.includes('uselang')){
      uselang='&uselang='+window.location.href.split('uselang=')[1].split('&')[0].split('#')[0];
     }
     const hrefs_length = hrefs.length;
