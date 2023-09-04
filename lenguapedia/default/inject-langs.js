@@ -5,7 +5,7 @@ void async function InjectLangs(){
 
    let xlangs = document.querySelector('lenguapedia').getAttribute('xlangs');
    
-    let hrefs = document.querySelectorAll('[href]:not([href*="langs="])');
+    let hrefs = document.querySelectorAll('a[href]:not(a[href*="langs="])');
 
     let hrefs_length = hrefs.length;
     for (let i = 0; i < hrefs_length; i++) {
@@ -20,7 +20,7 @@ void async function InjectLangs(){
 
 
    
-    hrefs = document.querySelectorAll('[href]:not([href*="uselang="])');
+    hrefs = document.querySelectorAll('a[href]:not(a[href*="uselang="])');
     let uselang='uselang=';
     if(window.location.href.includes('uselang=')){
      uselang='uselang='+window.location.href.split('uselang=')[1].split('&')[0].split('#')[0];
