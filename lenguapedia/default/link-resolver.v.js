@@ -6,7 +6,7 @@ void async function LinkResolver() {
   let hostListQuery = 'hostListQuery';
 
   setInterval(async function() {
-    let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"]');
+    let relativeLinks = document.querySelectorAll('a[href^="/"],a[href^="./"]');
     const relativeLinks_length = relativeLinks.length;
     for (let i = 0; i < relativeLinks_length; i++) {
       try {
@@ -26,8 +26,8 @@ void async function LinkResolver() {
     }
     hostListQuery = 'hostListQuery';
     for (let i = 0; i < hostList_length; i++) {
-      hostListQuery = hostListQuery + ',' + `[href*="/` + hostList[i] + `"]`;
-      hostListQuery = hostListQuery + ',' + `[href*="/www.` + hostList[i] + `"]`;
+      hostListQuery = hostListQuery + ',' + `a[href*="/` + hostList[i] + `"]`;
+      hostListQuery = hostListQuery + ',' + `a[href*="/www.` + hostList[i] + `"]`;
     }
     const href_list = document.querySelectorAll(hostListQuery);
     const href_list_length = href_list.length;
