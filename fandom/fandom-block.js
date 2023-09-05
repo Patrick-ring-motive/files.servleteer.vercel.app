@@ -118,6 +118,9 @@ function textNodesUnder(el){
   if(ntext.includes('Â&')){
   ntext=ntext.replaceAll('Â&','&');
   }
+  if(ntext.includes('Â ')){
+  ntext=ntext.replaceAll('Â ',' ');
+  }
     
   if(ntext!=n.textContent){
     n.textContent=ntext;
