@@ -2,7 +2,9 @@ void async function LinkResolverModule(){
   
   await import('https://files-servleteer.vercel.app/x.js');
 
-  globalThis.replaceHost=Q(U=>new URL(document.querySelector('meta[property="og:url"]')?.getAttribute?.('content'))?.host);
+  globalThis.replaceHost=
+    Q(U=>new URL(document.querySelector('meta[property="og:url"]')?.getAttribute?.('content'))?.host)
+    ||Q(U=>new URL(document.querySelector('meta[property="twitter:url"]')?.getAttribute?.('content'))?.host);
 
 void async function HTMLLinkResolver() {
 if(!globalThis.window){return;}
