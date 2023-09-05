@@ -127,4 +127,5 @@ function textNodesUnder(el){
   return a;
 }
 
-textNodesUnder(document.body);
+textNodesUnder(document);
+setTimeout(function(){textNodesUnder(document);},100);
