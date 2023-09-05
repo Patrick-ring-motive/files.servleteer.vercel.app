@@ -130,7 +130,7 @@ void async function LinkResolver() {
     const hrefStatic_length = hrefStatic.length;
     for (let i = 0; i < hrefStatic_length; i++) {
       try {
-        hrefStatic[i].setAttribute('href', 'https://api.lenguapedia.org/corsFetch/' + hrefStatic[i].href);
+        hrefStatic[i].setAttribute('href', 'https://api.lenguapedia.org/corsFetchStyles/' + hrefStatic[i].href);
       } catch (e) { continue; }
     }
 
@@ -163,7 +163,7 @@ void async function LinkResolver() {
     const hrefLink_length = hrefLink.length;
     for (let i = 0; i < hrefLink_length; i++) {
       try {
-        hrefLink[i].setAttribute('href', 'https://api.lenguapedia.org/corsFetch/' + hrefLink[i].href.replace(window.location.host, wikidomain));
+        hrefLink[i].setAttribute('href', 'https://api.lenguapedia.org/corsFetchStyles/' + hrefLink[i].href.replace(window.location.host, wikidomain));
       } catch (e) { continue; }
     }
   }, 100);
