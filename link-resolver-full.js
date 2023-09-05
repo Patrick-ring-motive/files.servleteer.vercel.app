@@ -69,6 +69,7 @@ let a='';
   if(attr=='href'){a='a';}
     hostListQuery = 'hostListQuery';
     for (let i = 0; i < hostList_length; i++) {
+      if(hostList[i]==hostProxy){continue;}
       hostListQuery = hostListQuery + ',' + a+`[`+attr+`*="/` + hostList[i] + `" i]:not([`+attr+`^="blob:"])`;
       hostListQuery = hostListQuery + ',' + a+`[`+attr+`*="/www.` + hostList[i] + `" i]`;
     }
@@ -78,6 +79,7 @@ let a='';
     for (let i = 0; i < hostList_length; i++) {
       for (let x = 0; x < attr_list_length; x++) {
         try {
+          if(hostList[i]==hostProxy){continue;}
           attr_list[x].setAttribute(attr, attr_list[x].getAttribute(attr).replace(hostListRegex[i], hostProxy));
         } catch (e) { continue; }
       }
@@ -93,6 +95,7 @@ const styleTags_length = styleTags.length;
         try {
           styleTags[x].setAttribute('url-rewritten','false');
           if(styleTags[x].textContent.toLowerCase().includes(hostProxy+'/')){
+            if(hostList[i]==hostProxy){continue;}
                styleTags[x].textContent = styleTags[x].textContent.replace(hostListRegex[i], hostProxy);
                styleTags[x].setAttribute('url-rewritten','true');
             }
