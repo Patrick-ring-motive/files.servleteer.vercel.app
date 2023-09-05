@@ -107,10 +107,18 @@ console.log(str);
 function textNodesUnder(el){
   var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
   while(n=walk.nextNode()){ 
-  a.push(n)
-  if(n.textContent.includes('â€¢')){
-  n.textContent=n.textContent.replaceAll('â€¢','•');
+  a.push(n);
+    let ntext=n.textContent;
+  if(ntext.includes('â€¢')){
+  ntext=ntext.replaceAll('â€¢','•');
   }
+  if(ntext.includes('â€“')){
+  ntext=ntext.replaceAll('â€“','–');
+  }
+  if(ntext!=n.textContent){
+    n.textContent=ntext;
+  }
+    
   };
   return a;
 }
