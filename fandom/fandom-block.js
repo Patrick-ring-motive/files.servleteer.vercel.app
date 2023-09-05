@@ -14,6 +14,13 @@ if(searchButton){
 searchButton.onclick = function() { window.location.href = '/wiki/Special:Search'; };
 searchButton.setAttribute('clickable','true');
 }
+
+let wikia_php=document.querySelector('[href^="https://api.lenguapedia.org/corsFetch/"][href$="wikia.php?controller=ThemeApi&method=themeVariables"]');
+  if(wikia_php){
+    wikia_php.setAttribute('href','https://api.lenguapedia.org/corsFetchStyles/https://minecraft.fandom.com/wikia.php?controller=ThemeApi&method=themeVariables');
+  }
+
+  
 removeLinkListeners();
   oddballLinks();
   textNodesUnder(document.body);
