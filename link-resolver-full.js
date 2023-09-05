@@ -63,11 +63,12 @@ function relativeTagsFix(attr){
 }
     
 function proxyTagsFix(attr){
-
+let a='';
+  if(attr=='href'){a='a';}
     hostListQuery = 'hostListQuery';
     for (let i = 0; i < hostList_length; i++) {
-      hostListQuery = hostListQuery + ',' + `[`+attr+`*="/` + hostList[i] + `" i]:not([`+attr+`^="blob:"])`;
-      hostListQuery = hostListQuery + ',' + `[`+attr+`*="/www.` + hostList[i] + `" i]`;
+      hostListQuery = hostListQuery + ',' + a+`[`+attr+`*="/` + hostList[i] + `" i]:not([`+attr+`^="blob:"])`;
+      hostListQuery = hostListQuery + ',' + a+`[`+attr+`*="/www.` + hostList[i] + `" i]`;
     }
     const attr_list = document.querySelectorAll(hostListQuery);
     const attr_list_length = attr_list.length;
