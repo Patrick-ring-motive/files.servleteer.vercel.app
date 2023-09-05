@@ -135,5 +135,19 @@ function textNodesUnder(el){
   return a;
 }
 
+function fixInlineStyles(){
+let styles=document.querySelectorAll('[style*="url(https://static.wikia.nocookie.net"]');
+  const styles_length=styles.length;
+  for(let i=0;i<styles_length;i++){
+
+    styles[i].setAttribute('style',styles[i].getAttribute('style').replaceAll('url(https://static.wikia.nocookie.net','url(https://api.lenguapedia.org/corsFetch/https://static.wikia.nocookie.net'))
+    
+    
+  }
+
+
+  
+}
+      
 textNodesUnder(document);
 setTimeout(function(){textNodesUnder(document);},100);
