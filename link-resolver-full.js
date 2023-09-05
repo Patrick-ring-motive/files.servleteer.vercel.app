@@ -4,7 +4,7 @@ void async function LinkResolverModule(){
 
   globalThis.replaceHost=
     Q(U=>new URL(document.querySelector('meta[property="og:url"]')?.getAttribute?.('content'))?.host)
-    ||Q(U=>new URL(document.querySelector('meta[property="twitter:url"]')?.getAttribute?.('content'))?.host);
+    ||Q(U=>new URL(document.querySelector('meta[name="twitter:url"]')?.getAttribute?.('content'))?.host);
 
 void async function HTMLLinkResolver() {
 if(!globalThis.window){return;}
