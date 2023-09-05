@@ -129,7 +129,11 @@ globalThis.customFetch = async function(request, headers) {
   if (typeof request == 'string') {
     request = request.replaceAll(replaceHost, window.location.host);
     req = new Request(request, headers);
-    response = await window.nativeFetch(req);
+    try{
+      response = await window.nativeFetch(req);
+    }catch(e){
+      response = await window.nativeFetch(request);
+    }
     response.requestInputObject = req;
   } else {
     response = await window.nativeFetch(request, headers);
