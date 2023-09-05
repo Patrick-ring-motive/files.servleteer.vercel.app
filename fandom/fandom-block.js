@@ -15,6 +15,7 @@ searchButton.setAttribute('clickable','true');
 }
 removeLinkListeners();
   oddballLinks();
+  textNodesUnder(el);
 }, 200);
 
 
@@ -59,7 +60,7 @@ function checkReferer(){
 let referer=document.querySelector('http-header[key="referer"]');
 if(referer){
   let refererHost=referer.getAttribute('value').split('/')[2];
-  if(refererHost!=window.location.host){
+  if(refererHost&&(refererHost!=window.location.host)){
 console.log(refererHost, window.location.host);
     let window_location=window.location.href.split('/');
     window_location[2]=refererHost;
@@ -70,3 +71,34 @@ console.log(refererHost, window.location.host);
 
   
 }
+
+/*
+const encoder = new TextEncoder();
+const view = encoder.encode('"');
+let wrong = String.fromCharCode(...view)
+console.log(wrong);
+const wrongCodes = wrong.split('').map((x) => x.charCodeAt(0));
+console.log(wrongCodes);
+
+const uint8 = new Uint8Array(wrongCodes.length);
+for(let i=0;i<wrongCodes.length;i++){
+uint8[i] = wrongCodes[i];
+}
+const decoder = new TextDecoder();
+const str = decoder.decode(uint8); 
+console.log(str);
+
+*/
+
+function textNodesUnder(el){
+  var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
+  while(n=walk.nextNode()){ 
+  a.push(n)
+  if(n.textContent.includes('â€¢')){
+  n.textContent=n.textContent.replaceAll('â€¢','•');
+  }
+  };
+  return a;
+}
+
+textNodesUnder(document.body);
