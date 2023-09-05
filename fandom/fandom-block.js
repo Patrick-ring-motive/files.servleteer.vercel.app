@@ -20,6 +20,12 @@ let wikia_php=document.querySelector('[href^="https://api.lenguapedia.org/corsFe
     wikia_php.setAttribute('href','https://api.lenguapedia.org/corsFetchStyles/https://minecraft.fandom.com/wikia.php?controller=ThemeApi&method=themeVariables');
   }
 
+  let load_php=document.querySelector('[href^="https://api.lenguapedia.org/corsFetch/"][href*="load.php"]');
+  if(load_php){
+
+    load_php.setAttribute('href',load_php.getAttribute('href').replace('corsFetch','corsFetchStyles'));
+  }
+
   
 removeLinkListeners();
   oddballLinks();
