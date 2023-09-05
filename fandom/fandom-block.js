@@ -26,6 +26,11 @@ let wikia_php=document.querySelector('[href^="https://api.lenguapedia.org/corsFe
     load_php.setAttribute('href',load_php.getAttribute('href').replace('corsFetch','corsFetchStyles'));
   }
 
+  let form_action = document.querySelector('[action*=".fandom.com"]');
+  if(form_action){
+    form_action.setAttribute('action',form_action.getAttribute('action').replace('.fandom.com','-wikia.lenguapedia.org'));
+  }
+
   
 removeLinkListeners();
   oddballLinks();
