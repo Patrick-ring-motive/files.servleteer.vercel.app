@@ -163,7 +163,7 @@ void async function LinkResolver() {
     const hrefLink_length = hrefLink.length;
     for (let i = 0; i < hrefLink_length; i++) {
       try {
-        hrefLink[i].setAttribute('href', 'https://api.lenguapedia.org/corsFetchStyles/' + hrefLink[i].href.replace(window.location.host, wikidomain));
+        hrefLink[i].setAttribute('href', 'https://api.lenguapedia.org/corsFetch/' + hrefLink[i].href.replace(window.location.host, wikidomain));
       } catch (e) { continue; }
     }
   }, 100);
