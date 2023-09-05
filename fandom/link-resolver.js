@@ -126,7 +126,7 @@ void async function LinkResolver() {
 
 
 
-    let hrefStatic = document.querySelectorAll('a[href^="https://static.wikia.nocookie.net"]');
+    let hrefStatic = document.querySelectorAll('[href^="https://static.wikia.nocookie.net"]');
     const hrefStatic_length = hrefStatic.length;
     for (let i = 0; i < hrefStatic_length; i++) {
       try {
