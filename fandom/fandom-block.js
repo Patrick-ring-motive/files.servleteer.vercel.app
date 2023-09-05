@@ -1,4 +1,5 @@
-checkReferer()
+checkReferer();
+
 setInterval(async function() {
 checkReferer();
   let s = document.querySelector('svg.close-icon');
@@ -15,7 +16,7 @@ searchButton.setAttribute('clickable','true');
 }
 removeLinkListeners();
   oddballLinks();
-  textNodesUnder(el);
+  textNodesUnder(document.body);
 }, 200);
 
 
@@ -74,7 +75,7 @@ console.log(refererHost, window.location.host);
 
 /*
 const encoder = new TextEncoder();
-const view = encoder.encode('"');
+const view = encoder.encode('•â€¢');
 let wrong = String.fromCharCode(...view)
 console.log(wrong);
 const wrongCodes = wrong.split('').map((x) => x.charCodeAt(0));
