@@ -197,7 +197,7 @@ async function jsonpFetch(url){
     j.reject();
   };
   jscr.src=url;
-  document.body.appendChild(jscr);
+  document.firstElementChild.appendChild(jscr);
   await jscr.promise;
 
   return jscr.getAttribute('response-body');
