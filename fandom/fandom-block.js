@@ -109,23 +109,30 @@ console.log(str);
 
 */
 
+function fixDecode(str){
+let codes = [
+         ['â€¢','•'],
+         ['â€“','–'],
+         ['Â&','&'],
+         ['â€‹',''],
+         ['Â ',' ']
+           ];
+  const codes_length=codes.length;
+  for(let i=0;i<codes_length;i++){
+    str=str.replaceAll(codes[i][0],codes[i][1]);
+  }
+
+return str;
+  
+}
+
 function textNodesUnder(el){
   var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
   while(n=walk.nextNode()){ 
   a.push(n);
     let ntext=n.textContent;
-  if(ntext.includes('â€¢')){
-  ntext=ntext.replaceAll('â€¢','•');
-  }
-  if(ntext.includes('â€“')){
-  ntext=ntext.replaceAll('â€“','–');
-  }
-  if(ntext.includes('Â&')){
-  ntext=ntext.replaceAll('Â&','&');
-  }
-  if(ntext.includes('Â ')){
-  ntext=ntext.replaceAll('Â ',' ');
-  }
+  
+  ntext=fixDecode(ntext);
     
   if(ntext!=n.textContent){
     n.textContent=ntext;
