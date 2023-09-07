@@ -3,6 +3,9 @@ if(!globalThis.the){globalThis.the= {};}
 
 checkReferer();
 
+setTimeout(function(){fandomBlock();},1000);
+
+
 document.addEventListener("DOMContentLoaded", (event) => {
   fandomBlock();
 });
