@@ -144,7 +144,13 @@ if(!apiHost){apiHost='api.lenguapedia.org';}
     const hrefStatic_length = hrefStatic.length;
     for (let i = 0; i < hrefStatic_length; i++) {
       try {
-        hrefStatic[i].setAttribute('href', 'https://'+apiHost+'/corsFetchStyles/' + hrefStatic[i].href);
+        let char = '?';
+        let original = hrefStatic[i].href;
+        let rewrite = 'https://'+apiHost+'/corsFetchStyles/' + original
+        if(original.includes('?')){
+          char='&';
+        }
+        hrefStatic[i].setAttribute('href', rewrite+char+'host='+window.location.host);
       } catch (e) { continue; }
     }
 
@@ -154,7 +160,13 @@ if(!apiHost){apiHost='api.lenguapedia.org';}
     const srcStatic_length = srcStatic.length;
     for (let i = 0; i < srcStatic_length; i++) {
       try {
-        srcStatic[i].setAttribute('src', 'https://'+apiHost+'/corsFetch/' + srcStatic[i].src);
+        let char = '?';
+        let original = srcStatic[i].src;
+        let rewrite = 'https://'+apiHost+'/corsFetchStyles/' + original
+        if(original.includes('?')){
+          char='&';
+        }
+        srcStatic[i].setAttribute('src', rewrite+char+'host='+window.location.host);
         srcStatic[i].removeAttribute('srcset');
       } catch (e) { continue; }
     }
@@ -165,9 +177,15 @@ if(!apiHost){apiHost='api.lenguapedia.org';}
     const dsrcStatic_length = dsrcStatic.length;
     for (let i = 0; i < dsrcStatic_length; i++) {
       try {
-        dsrcStatic[i].setAttribute('data-src', 'https://'+apiHost+'/corsFetch/' + dsrcStatic[i].getAttribute('data-src'));
-        dsrcStatic[i].setAttribute('src', dsrcStatic[i].getAttribute('data-src'));
-     dsrcStatic[i].removeAttribute('class');
+        let char = '?';
+        let original = dsrcStatic[i].getAttribute('data-src');
+        let rewrite = 'https://'+apiHost+'/corsFetchStyles/' + original
+        if(original.includes('?')){
+          char='&';
+        }
+        dsrcStatic[i].setAttribute('data-src', rewrite+char+'host='+window.location.host);
+		    dsrcStatic[i].setAttribute('src', dsrcStatic[i].getAttribute('data-src'));
+		    dsrcStatic[i].removeAttribute('class');
       } catch (e) { continue; }
     }
 
