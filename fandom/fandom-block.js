@@ -66,11 +66,11 @@ removeLinkListeners();
 
   
 
-let searchButton=document.querySelector('.mobile-global-navigation__button-search:not([clickable])');
+let searchButtonB=document.querySelector('.mobile-global-navigation__button-search:not([clickable])');
 
-if(searchButton){
-searchButton.onclick = function() { window.location.href = '/wiki/Special:Search'; };
-searchButton.setAttribute('clickable','true');
+if(searchButtonB){
+searchButtonB.onclick = function() { window.location.href = '/wiki/Special:Search'; };
+searchButtonB.setAttribute('clickable','true');
 }
 
   function removeLinkListeners(){
