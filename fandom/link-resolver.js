@@ -188,6 +188,8 @@ if(!apiHost){apiHost='api.lenguapedia.org';}
 		    the['data-srcStatic'][i].removeAttribute('class');
       } catch (e) { continue; }
     }
+    delete(the['data-srcStatic_length']);
+    delete(the['data-srcStatic']);
 
     let wikidomain = Q(U => document.querySelector('meta[name="twitter:url"]')
       .getAttribute('content').split['/'][2]) || 'minecraft.fandom.com';
