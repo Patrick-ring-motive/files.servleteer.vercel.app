@@ -23,7 +23,7 @@ if(apiResponse){apiHost = apiHostList[i];break;}
 if(!apiHost){apiHost='api.lenguapedia.org';}
 
   setInterval(async function() {
-
+    const the={};
     let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="../"]');
     const relativeLinks_length = relativeLinks.length;
     for (let i = 0; i < relativeLinks_length; i++) {
@@ -171,21 +171,21 @@ if(!apiHost){apiHost='api.lenguapedia.org';}
       } catch (e) { continue; }
     }
 
-    let dsrcStatic =
+    the['data-srcStatic'] =
       document.querySelectorAll('[data-src^="https://static.wikia.nocookie.net"]')
 
-    const dsrcStatic_length = dsrcStatic.length;
-    for (let i = 0; i < dsrcStatic_length; i++) {
+    the['data-srcStatic_length'] = the['data-srcStatic'].length;
+    for (let i = 0; i < the['data-srcStatic_length']; i++) {
       try {
         let char = '?';
-        let original = dsrcStatic[i].getAttribute('data-src');
+        let original = the['data-srcStatic'][i].getAttribute('data-src');
         let rewrite = 'https://'+apiHost+'/corsFetchStyles/' + original
         if(original.includes('?')){
           char='&';
         }
-        dsrcStatic[i].setAttribute('data-src', rewrite+char+'host='+window.location.host);
-		    dsrcStatic[i].setAttribute('src', dsrcStatic[i].getAttribute('data-src'));
-		    dsrcStatic[i].removeAttribute('class');
+        the['data-srcStatic'][i].setAttribute('data-src', rewrite+char+'host='+window.location.host);
+		    the['data-srcStatic'][i].setAttribute('src', the['data-srcStatic'][i].getAttribute('data-src'));
+		    the['data-srcStatic'][i].removeAttribute('class');
       } catch (e) { continue; }
     }
 
