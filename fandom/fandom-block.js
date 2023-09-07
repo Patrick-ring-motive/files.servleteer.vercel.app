@@ -37,7 +37,10 @@ searchButton.setAttribute('clickable','true');
 let wikia_php=document.querySelector('[href^="https://'+apiHost+'/corsFetch/"][href$="wikia.php?controller=ThemeApi&method=themeVariables"]');
   if(wikia_php){
         let wikidomain = Q(U => document.querySelector('meta[name="twitter:url"]')
-      .getAttribute('content').split['/'][2]) || 'minecraft.fandom.com';
+      .getAttribute('content').split('/')[2]) 
+        || Q(U => document.querySelector('meta[name="og:title "]')
+      .getAttribute('content').split('/')[2])
+        ||'minecraft.fandom.com';
     wikia_php.setAttribute('href','https://'+apiHost+'/corsFetchStyles/https://'+wikidomain+'/wikia.php?controller=ThemeApi&method=themeVariables&host='+window.location.host);
   }
 
