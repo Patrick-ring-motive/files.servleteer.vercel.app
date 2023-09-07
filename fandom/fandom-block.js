@@ -3,10 +3,16 @@ const the = {};
 
 checkReferer();
 
+document.addEventListener("DOMContentLoaded", (event) => {
+  fandomAdblock();
+});
+
+fandomAdblock();
+
+async function fandomBlock(){
 
 
-void async function fandomBlock(){
-
+  
 let apiHostList = ['api.lenguapedia.org','lenguapedia-api.vercel.app','lenguapedia-api.weblet.repl.co'];
 let apiHost = undefined;
 
@@ -20,11 +26,10 @@ if(apiResponse){apiHost = apiHostList[i];break;}
 if(!apiHost){apiHost='api.lenguapedia.org';}
   
 setInterval(async function() {
-checkReferer();
+  checkReferer();
   let s = document.querySelector('svg.close-icon');
   if (s&&s.click) { s.click(); }
-  //s=document.querySelector('[xlink:href="#wds-icons-close-tiny"]');
-  //if(s){s.click();}
+
 
   
 let searchButtonA=document.querySelector('.mobile-global-navigation__button-search:not([clickable])');
@@ -62,7 +67,7 @@ removeLinkListeners();
 }, 200);
 
 
-}?.();
+}
 
   
 
