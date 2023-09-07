@@ -14,10 +14,11 @@ fandomBlock();
 
 async function fandomBlock(){
 
+if(!globalThis.apiHost){
+  globalThis.apiHost = undefined;
 
   
 let apiHostList = ['api.lenguapedia.org','lenguapedia-api.vercel.app','lenguapedia-api.weblet.repl.co'];
-let apiHost = undefined;
 
 for(let i=0;i<apiHostList.length;i++){try{
 
@@ -27,6 +28,9 @@ if(apiResponse){apiHost = apiHostList[i];break;}
 }catch(e){console.log(e);continue;}}
 
 if(!apiHost){apiHost='api.lenguapedia.org';}
+  
+  
+  }
   
 setInterval(async function() {
   checkReferer();
