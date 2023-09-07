@@ -4,10 +4,10 @@ const the = {};
 checkReferer();
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  fandomAdblock();
+  fandomBlock();
 });
 
-fandomAdblock();
+fandomBlock();
 
 async function fandomBlock(){
 
