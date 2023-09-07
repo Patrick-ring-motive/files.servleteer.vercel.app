@@ -1,5 +1,5 @@
 globalThis.Q = U => { try { return U(); } catch (e) { return undefined; } };
-const the = {};
+if(!globalThis.the){globalThis.the= {};}
 
 checkReferer();
 
