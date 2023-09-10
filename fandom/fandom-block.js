@@ -18,7 +18,7 @@ if(!globalThis.apiHost){
   globalThis.apiHost = undefined;
 
   
-let apiHostList = ['api.lenguapedia.org','lenguapedia-api.vercel.app','lenguapedia-api.weblet.repl.co'];
+let apiHostList = ['lenguapedia-api.vercel.app' ,'api.lenguapedia.org'   ,'lenguapedia-api.weblet.repl.co'];
 
 for(let i=0;i<apiHostList.length;i++){try{
 
