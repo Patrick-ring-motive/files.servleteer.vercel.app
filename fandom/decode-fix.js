@@ -82,7 +82,7 @@ async function textNodesUnder(el){
   a.push(n);
     let ntext=n.textContent;
   
-  //ntext=await fixDecode(ntext);
+  ntext=await fixDecode(ntext);
 ntext=await recode(ntext);
     
   if(ntext!=n.textContent){
