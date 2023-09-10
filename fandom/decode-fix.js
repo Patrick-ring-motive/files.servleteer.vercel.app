@@ -1,4 +1,5 @@
 let fixingDecode=false;
+let decodeCount=0;
 async function setTextContent(n,text){
 
    n.textContent=text;
@@ -11,7 +12,7 @@ if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
 
-for(let i=0;i<1000;i++){
+for(let i=0;i<1024;i++){
 let char =String.fromCharCode(i);
 const encoder = new TextEncoder();
 const view = encoder.encode(char);
@@ -47,6 +48,8 @@ return str;
 
 async function textNodesUnder(el){
   if(fixingDecode){return;}
+  if(decodeCount>10){return;}
+  decodeCount++;
   fixingDecode=true;
   var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
   while(n=walk.nextNode()){ 
