@@ -32,7 +32,7 @@ if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
 
-for(let i=0;i<1024;i++){
+for(let i=0;i<10240;i++){
 let char =String.fromCharCode(i);
 const encoder = new TextEncoder();
 const view = encoder.encode(char);
@@ -83,7 +83,7 @@ async function textNodesUnder(el){
     let ntext=n.textContent;
   
   ntext=await fixDecode(ntext);
-ntext=await recode(ntext);
+//ntext=await recode(ntext);
     
   if(ntext!=n.textContent){
    await setTextContent(n,ntext);
