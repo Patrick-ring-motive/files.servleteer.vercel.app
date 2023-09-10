@@ -5,6 +5,10 @@ if(!globalThis.decodeCount){
   globalThis.decodeCount=0;
 }
 
+globalThis.sleep=function(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
 async function setTextContent(n,text){
 
    n.textContent=text;
@@ -97,6 +101,7 @@ async function textNodesUnder(el){
     
   if(ntext!=n.textContent){
    await setTextContent(n,ntext);
+      await sleep(50);
   }
     
   };
