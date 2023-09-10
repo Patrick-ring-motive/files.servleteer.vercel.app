@@ -1,5 +1,12 @@
+let fixingDecode=false;
+async function setTextContent(n,text){
 
-function fixDecode(str){
+   n.textContent=text;
+  
+}
+
+
+async function fixDecode(str){
 if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
@@ -38,22 +45,25 @@ return str;
   
 }
 
-function textNodesUnder(el){
+async function textNodesUnder(el){
+  if(fixingDecode){return;}
+  fixingDecode=true;
   var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
   while(n=walk.nextNode()){ 
   a.push(n);
     let ntext=n.textContent;
   
-  ntext=fixDecode(ntext);
+  ntext=await fixDecode(ntext);
     
   if(ntext!=n.textContent){
-    n.textContent=ntext;
+   await setTextContent(n,ntext);
   }
     
   };
+  fixingDecode=false;
   return a;
 }
-setInterval(function(){
-  textNodesUnder(document.firstElementChild);
+setInterval(async function(){
+  await textNodesUnder(document.firstElementChild);
 },1000);
 textNodesUnder(document.firstElementChild);
