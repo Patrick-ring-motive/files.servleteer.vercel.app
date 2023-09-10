@@ -19,6 +19,11 @@ const view = encoder.encode(char);
 decodeTable.push([String.fromCharCode(...view),char]);
 }
 let codes = [
+  ['Â† ','←'],
+  ['Â†’','→'],
+ ['â€œ','“'],
+  ['â€ ','”'],
+  
          ['â€‰•â€‰',' • '],
          ['â€‰',' '],
          ['â€¢','•'],
