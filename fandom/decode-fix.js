@@ -1,4 +1,15 @@
+
 function fixDecode(str){
+if(!globalThis.decodeTable){
+globalThis.decodeTable=[];
+
+
+for(let i=0;i<1024;i++){
+let char =String.fromCharCode(i);
+const encoder = new TextEncoder();
+const view = encoder.encode(char);
+decodeTable.push([char,String.fromCharCode(...view)]);
+}
 let codes = [
          ['â€‰•â€‰',' • '],
          ['â€‰',' '],
@@ -11,7 +22,16 @@ let codes = [
            ];
   const codes_length=codes.length;
   for(let i=0;i<codes_length;i++){
-    str=str.replaceAll(codes[i][0],codes[i][1]);
+    decodeTable.push(codes[i]);
+  }
+  
+}
+
+  
+
+  const decodeTable_length=decodeTable.length;
+  for(let i=0;i<decodeTable_length;i++){
+    str=str.replaceAll(decodeTable[i][0],decodeTable[i][1]);
   }
 
 return str;
