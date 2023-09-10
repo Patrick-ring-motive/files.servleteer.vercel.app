@@ -11,7 +11,7 @@ if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
 
-for(let i=0;i<10000;i++){
+for(let i=0;i<1000;i++){
 let char =String.fromCharCode(i);
 const encoder = new TextEncoder();
 const view = encoder.encode(char);
