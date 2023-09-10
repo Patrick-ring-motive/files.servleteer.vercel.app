@@ -70,7 +70,7 @@ let wikia_php=document.querySelector('[href^="https://'+apiHost+'/corsFetch/"][h
   
 removeLinkListeners();
   oddballLinks();
-  textNodesUnder(document.body);
+  //textNodesUnder(document.body);
 }, 200);
 
 
@@ -234,5 +234,5 @@ async function jsonpFetch(url){
 
 
       
-textNodesUnder(document);
-setTimeout(function(){textNodesUnder(document.body);},100);
+//textNodesUnder(document);
+//setTimeout(function(){textNodesUnder(document.body);},100);
