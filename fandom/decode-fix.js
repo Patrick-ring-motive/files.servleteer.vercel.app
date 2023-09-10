@@ -8,7 +8,7 @@ for(let i=0;i<1024;i++){
 let char =String.fromCharCode(i);
 const encoder = new TextEncoder();
 const view = encoder.encode(char);
-decodeTable.push([char,String.fromCharCode(...view)]);
+decodeTable.push([String.fromCharCode(...view),char]);
 }
 let codes = [
          ['â€‰•â€‰',' • '],
