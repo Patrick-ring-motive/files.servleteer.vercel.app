@@ -7,6 +7,26 @@ async function setTextContent(n,text){
 }
 
 
+async function recode(str){
+const encoder = new TextEncoder();
+const view = encoder.encode(str);
+let wrong = String.fromCharCode(...view)
+console.log(wrong);
+const wrongCodes = wrong.split('').map((x) => x.charCodeAt(0));
+//console.log(wrongCodes);
+
+const uint8 = new Uint8Array(wrongCodes.length);
+for(let i=0;i<wrongCodes.length;i++){
+uint8[i] = wrongCodes[i];
+}
+const decoder = new TextDecoder();
+const out = decoder.decode(uint8); 
+//console.log(str);
+return out;
+
+  
+}
+
 async function fixDecode(str){
 if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
@@ -62,7 +82,8 @@ async function textNodesUnder(el){
   a.push(n);
     let ntext=n.textContent;
   
-  ntext=await fixDecode(ntext);
+  //ntext=await fixDecode(ntext);
+ntext=await recode(ntext);
     
   if(ntext!=n.textContent){
    await setTextContent(n,ntext);
