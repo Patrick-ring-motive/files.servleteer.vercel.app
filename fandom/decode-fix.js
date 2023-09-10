@@ -8,10 +8,10 @@ async function setTextContent(n,text){
 
 
 async function recode(str){
-const encoder = new TextEncoder();
-const view = encoder.encode(str);
-let wrong = String.fromCharCode(...view)
-console.log(wrong);
+//const encoder = new TextEncoder();
+//const view = encoder.encode(str);
+let wrong = str;//String.fromCharCode(...view)
+//console.log(wrong);
 const wrongCodes = wrong.split('').map((x) => x.charCodeAt(0));
 //console.log(wrongCodes);
 
