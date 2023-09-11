@@ -196,7 +196,7 @@ void function DedicatedWorker() {
     }
     functions={
         multiply:function(num1,num2){
-            const result = nums1 * nums2;
+            const result = num1 * num2;
             if (isNaN(result)) {
                 return 'Please write two numbers';
             } else {
