@@ -120,7 +120,7 @@ async function textNodesUnder(el){
     
   if(ntext!=oldText){
    await setTextContent(n,ntext);
-    if(getRandomInt(100)==5){
+    if(getRandomInt(25)==5){
       await sleep(200);
     }
   }
