@@ -64,8 +64,8 @@ const out = decoder.decode(uint8);
 console.log(out);
 */
 
-let startDecode = 0;
-let incrementDecode = 1000;
+if(!globalThis.startDecode){globalThis.startDecode = 0;}
+if(!globalThis.incrementDecode){globalThis.incrementDecode = 1000;}
 async function fixDecode(str){
 if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
