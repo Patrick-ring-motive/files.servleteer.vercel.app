@@ -188,6 +188,8 @@ void function DedicatedWorker() {
     self.onmessage = function (e) {
         console.log('Worker: Message received from main script');
         let currentFunction=functions[e.data[1]];
+      console.log('Data recieved from main script: ');
+      condole.log(e.data);
         if(currentFunction instanceof AsyncFunction){
             async(async I=>postMessage([e.data[0],await currentFunction(...e.data[2])]));
         }else{
