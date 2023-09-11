@@ -64,12 +64,15 @@ const out = decoder.decode(uint8);
 console.log(out);
 */
 
+let startDecode = 0;
+
 async function fixDecode(str){
-if(!globalThis.decodeTable){
+//if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
+  
 
-for(let i=0;i<409600;i++){try{
+for(let i=startDecode;i<(startDecode+4096);i++){try{
 let char = String.fromCharCode(i);
 const encoder = new TextEncoder();
 const view = encoder.encode(char);
@@ -103,7 +106,7 @@ let codes = [
     decodeTable.push(codes[i]);
   }
   
-}
+//}
 
   
 
@@ -113,15 +116,15 @@ let codes = [
     str=str.replaceAll(decodeTable[i][0],decodeTable[i][1]);
     }
   }catch(e){continue}}
-
+startDecode+=4096;
 return str;
   
 }
 
 async function textNodesUnder(el){
   if(fixingDecode){return;}
-  if(decodeCount>10){return;}
-  decodeCount++;
+ // if(decodeCount>10){return;}
+//  decodeCount++;
   fixingDecode=true;
   var n, walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
   while(n=walk.nextNode()){ 
