@@ -69,7 +69,7 @@ if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
 
-for(let i=0;i<4096;i++){try{
+for(let i=0;i<40960;i++){try{
 let char = String.fromCharCode(i);
 const encoder = new TextEncoder();
 const view = encoder.encode(char);
