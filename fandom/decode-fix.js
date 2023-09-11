@@ -15,11 +15,12 @@ globalThis.sleep=function(ms) {
 
 async function setTextContent(n,text){
 if(window.requestIdleCallback){
-  requestIdleCallback(
-    ()=>{
+  return new Promise(resolve => {
+    requestIdleCallback(()=>{
       n.textContent=text;
-    }
-  );
+      resolve();
+    });
+});
 }else{
    n.textContent=text;
   return;
