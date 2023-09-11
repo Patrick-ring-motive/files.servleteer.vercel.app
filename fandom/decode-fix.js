@@ -267,7 +267,7 @@ All the worker Stuff is set up on the window side
 
     async function multiply(num1,num2){
         console.log('Message posted to worker');
-        let multiple = await processWorkerMessage('multiply',arguments);
+        let multiple = await processWorkerMessage('multiply',Array.from(arguments));
         console.log(multiple);
     }
 
