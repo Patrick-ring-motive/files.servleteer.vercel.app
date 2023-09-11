@@ -227,18 +227,27 @@ void async function DedicatedWindow() {
         workerMessageMap.set(wmi,wmip);
         return wmi;
     }
-    const myWorker = new Worker(document?.currentScript?.src);
 
+  if(!globalThis.decodeWorker){
+    try{
+    globalThis.decodeWorker = new Worker(document?.currentScript?.src);
+    }catch(e){
+      let text = await (await fetch(document?.currentScript?.src)).text();
+      let blob = new Blob([text], {type: 'text/javascript'});
+      globalThis.decodeWorker = new Worker(URL.createObjectURL(blob));
+    }
+  }
+  
     async function processWorkerMessage(func,values){
         let workerId = getWorkerMessageId();
         let workerFunction = func;
-        myWorker.postMessage([workerId,workerFunction,values]);
+        globalThis.decodeWorker.postMessage([workerId,workerFunction,values]);
         let workerPromise = workerMessageMap.get(workerId).promise;
         let workerReturnValue = await workerPromise;
         setTimeout(X=>workerMessageMap.delete(workerId),100);
         return workerReturnValue;
     }
-    myWorker.onmessage = async function (e) {
+    globalThis.decodeWorker.onmessage = async function (e) {
         let workerId = e.data[0];
         let workerReturnValue = e.data[1];
         workerMessageMap.get(workerId).resolve(workerReturnValue);
