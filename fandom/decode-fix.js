@@ -79,7 +79,9 @@ let codes = [
 
   const decodeTable_length=decodeTable.length;
   for(let i=0;i<decodeTable_length;i++){try{
+    if(str.includes(decodeTable[i][0])){
     str=str.replaceAll(decodeTable[i][0],decodeTable[i][1]);
+    }
   }catch(e){continue}}
 
 return str;
@@ -94,12 +96,12 @@ async function textNodesUnder(el){
   var n, walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
   while(n=walk.nextNode()){ 
   
-    let ntext=n.textContent;
-  
+  let ntext=n.textContent;
+  const oldText=ntext;
   ntext=await fixDecode(ntext);
 
     
-  if(ntext!=n.textContent){
+  if(ntext!=oldText){
    await setTextContent(n,ntext);
       await sleep(50);
   }
@@ -111,4 +113,4 @@ async function textNodesUnder(el){
 setInterval(async function(){
   await textNodesUnder(document.firstElementChild);
 },1000);
-textNodesUnder(document.firstElementChild);
+//textNodesUnder(document.firstElementChild);
