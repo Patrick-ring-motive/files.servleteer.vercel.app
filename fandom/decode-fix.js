@@ -93,18 +93,6 @@ void async function decodeWithoutWorkers() {
     if (!globalThis.decodeTable) {
       globalThis.decodeTable = [];
 
-
-
-      for (let i = startDecode; i < (startDecode + incrementDecode); i++) {
-        try {
-          let char = String.fromCharCode(i);
-          const encoder = new TextEncoder();
-          const view = encoder.encode(char);
-          decodeTable.push([String.fromCharCode(...view), char]);
-        } catch (e) {
-          continue;
-        }
-      }
       function uncode(str) {
         const encoder = new TextEncoder();
         const view = encoder.encode(str);
@@ -116,6 +104,18 @@ void async function decodeWithoutWorkers() {
       for (let i = 0; i < uncodes_length; i++) {
         decodeTable.push([uncode(uncodes[i]),uncodes[i]]);
       }
+
+      for (let i = startDecode; i < (startDecode + incrementDecode); i++) {
+        try {
+          let char = String.fromCharCode(i);
+          const encoder = new TextEncoder();
+          const view = encoder.encode(char);
+          decodeTable.push([String.fromCharCode(...view), char]);
+        } catch (e) {
+          continue;
+        }
+      }
+
 
       
       let codes = [
@@ -246,18 +246,6 @@ void function DedicatedWorker() {
     if (!globalThis.decodeTable) {
       globalThis.decodeTable = [];
 
-
-
-      for (let i = startDecode; i < (startDecode + incrementDecode); i++) {
-        try {
-          let char = String.fromCharCode(i);
-          const encoder = new TextEncoder();
-          const view = encoder.encode(char);
-          decodeTable.push([String.fromCharCode(...view), char]);
-        } catch (e) {
-          continue;
-        }
-      }
       function uncode(str) {
         const encoder = new TextEncoder();
         const view = encoder.encode(str);
@@ -269,6 +257,18 @@ void function DedicatedWorker() {
       for (let i = 0; i < uncodes_length; i++) {
         decodeTable.push([uncode(uncodes[i]),uncodes[i]]);
       }
+
+      for (let i = startDecode; i < (startDecode + incrementDecode); i++) {
+        try {
+          let char = String.fromCharCode(i);
+          const encoder = new TextEncoder();
+          const view = encoder.encode(char);
+          decodeTable.push([String.fromCharCode(...view), char]);
+        } catch (e) {
+          continue;
+        }
+      }
+
       let codes = [
         ['Î•', 'Ε'],
         ['ÑŠ', 'ъ'],
