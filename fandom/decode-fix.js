@@ -40,9 +40,19 @@ return out;
   
 }
 
+/*
+let wrong = 'Î•Î»Î»Î·Î½Î¹ÎºÎ¬';
+const wrongCodes = wrong.split('').map((x) => x.charCodeAt(0));
+//console.log(wrongCodes);
 
-
-
+const uint8 = new Uint8Array(wrongCodes.length);
+for(let i=0;i<wrongCodes.length;i++){
+uint8[i] = wrongCodes[i];
+}
+const decoder = new TextDecoder();
+const out = decoder.decode(uint8); 
+console.log(out);
+*/
 
 async function fixDecode(str){
 if(!globalThis.decodeTable){
@@ -110,7 +120,7 @@ async function textNodesUnder(el){
     
   if(ntext!=oldText){
    await setTextContent(n,ntext);
-    if(getRandomInt(10)==5){
+    if(getRandomInt(100)==5){
       await sleep(200);
     }
   }
