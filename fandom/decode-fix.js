@@ -229,7 +229,7 @@ void function DedicatedWorker() {
 
 
 
-      for (let i = 0; i < 4096; i++) {
+      for (let i = 0; i < 150000; i++) {
         try {
           let char = String.fromCharCode(i);
           const encoder = new TextEncoder();
