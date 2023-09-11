@@ -76,6 +76,9 @@ const view = encoder.encode(char);
 decodeTable.push([String.fromCharCode(...view),char]);
 }catch(e){continue;}}
 let codes = [
+         ['Î•','Ε'],
+         ['ÑŠ','ъ'],
+         ['Ñ€','р'],
          ['â€”','—'],
          ['â€•','―'],
          ['â€¦','…'],
