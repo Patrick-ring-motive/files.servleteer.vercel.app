@@ -278,7 +278,7 @@ void function DedicatedWorker() {
           str = str.replaceAll(decodeTable[i][0], decodeTable[i][1]);
         }
       } catch (e) {
-        continue
+        continue;
       }
     }
     return str;
@@ -294,6 +294,8 @@ void function DedicatedWorker() {
             resultList.push([i,alteredText]);
           }
         }
+        console.test('Sending result List');
+        console.test(resultList);
         return resultList;
       }
     }
