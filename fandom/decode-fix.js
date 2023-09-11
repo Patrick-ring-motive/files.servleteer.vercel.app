@@ -191,9 +191,9 @@ void function DedicatedWorker() {
       console.log('Data recieved from main script: ');
       console.log(e.data);
         if(currentFunction instanceof AsyncFunction){
-            async(async I=>postMessage([e.data[0],await currentFunction(...e.data[2])]));
+            async(async I=>postMessage([e.data[0],await currentFunction(...(e.data[2]))]));
         }else{
-            postMessage([e.data[0],currentFunction(e.data[2])]);
+            postMessage([e.data[0],currentFunction(...(e.data[2]))]);
         }
     }
     functions={
