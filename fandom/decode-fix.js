@@ -87,7 +87,7 @@ void async function decodeWithoutWorkers() {
     globalThis.startDecode = 0;
   }
   if (!globalThis.incrementDecode) {
-    globalThis.incrementDecode = 1000;
+    globalThis.incrementDecode = 4096;
   }
   async function fixDecode(str) {
     if (!globalThis.decodeTable) {
@@ -147,7 +147,7 @@ void async function decodeWithoutWorkers() {
         continue
       }
     }
-    startDecode += incrementDecode;
+    //startDecode += incrementDecode;
     return str;
 
   }
@@ -229,7 +229,7 @@ void function DedicatedWorker() {
 
 
 
-      for (let i = 0; i < 150000; i++) {
+      for (let i = 0; i < 1500000; i++) {
         try {
           let char = String.fromCharCode(i);
           const encoder = new TextEncoder();
