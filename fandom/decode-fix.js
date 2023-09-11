@@ -117,7 +117,7 @@ void async function decodeWithoutWorkers() {
         decodeTable.push([uncode(uncodes[i]),uncodes[i]]);
       }
 
-      for (let i = startDecode; i < (startDecode + incrementDecode); i++) {
+      for (let i = 0; i < (0 + incrementDecode); i++) {
         try {
           let char = String.fromCharCode(i);
           const encoder = new TextEncoder();
