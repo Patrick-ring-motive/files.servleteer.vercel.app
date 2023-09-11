@@ -388,7 +388,7 @@ All the worker Stuff is set up on the window side
     const resultList_length=resultList.length;
     for(let i = 0;i<resultList_length;i++){
       const nodeIndex=resultList[i][0];
-      const nodeText=resultList[i][0];
+      const nodeText=resultList[i][1];
       nodeList[nodeIndex].textContent=nodeText;
     }
     
