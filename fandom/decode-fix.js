@@ -90,7 +90,7 @@ void async function decodeWithoutWorkers() {
     globalThis.incrementDecode = 1000;
   }
   async function fixDecode(str) {
-    globalThis.decodeTableRotate = [];
+  /*  globalThis.decodeTableRotate = [];
 
     for (let i = startDecode; i < (startDecode + incrementDecode); i++) {
         try {
@@ -101,7 +101,7 @@ void async function decodeWithoutWorkers() {
         } catch (e) {
           continue;
         }
-      }
+      }*/
     if (!globalThis.decodeTable) {
       globalThis.decodeTable = [];
 
@@ -172,7 +172,7 @@ void async function decodeWithoutWorkers() {
         continue
       }
     }
- const decodeTableRotate_length = decodeTableRotate.length;
+/* const decodeTableRotate_length = decodeTableRotate.length;
     for (let i = 0; i < decodeTableRotate_length; i++) {
       try {
         if (str.includes(decodeTableRotate[i][0])) {
@@ -182,7 +182,7 @@ void async function decodeWithoutWorkers() {
         continue
       }
     }
-    startDecode += incrementDecode;
+    startDecode += incrementDecode;*/
     return str;
 
   }
