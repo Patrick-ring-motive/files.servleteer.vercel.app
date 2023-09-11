@@ -15,8 +15,8 @@ globalThis.sleep=function(ms) {
 
 async function setTextContent(n,text){
 if(window.requestIdleCallback){
-  return new Promise(resolve => {
-    requestIdleCallback(()=>{
+  return new Promise(function(resolve) {
+    requestIdleCallback(function(){
       n.textContent=text;
       resolve();
     });
