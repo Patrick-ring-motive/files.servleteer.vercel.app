@@ -33,8 +33,10 @@ if(!apiHost){apiHost='api.lenguapedia.org';}
 setInterval(async function() {
   checkReferer();
 
-  if(document.querySelector('.search-modal__content')&&(!window.location.href.includes('Special:Search'))){
-
+  if(document.querySelector('.search-modal__content')
+     &&(!window.location.href.includes('Special:Search'))
+    &&(!globalThis.redirecting)){
+    globalThis.redirecting=true;
     window.location.href='https://'+window.location.host+'/wiki/Special:Search';
     
   }
