@@ -105,7 +105,7 @@ async function textNodesUnder(el){
     
   if(ntext!=oldText){
    await setTextContent(n,ntext);
-      await sleep(50);
+    //  await sleep(50);
   }
     
   };
