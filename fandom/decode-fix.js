@@ -14,8 +14,17 @@ globalThis.sleep=function(ms) {
 };
 
 async function setTextContent(n,text){
-
+if(window.requestIdleCallback){
+  requestIdleCallback(
+    ()=>{
+      n.textContent=text;
+    }
+  );
+}else{
    n.textContent=text;
+  return;
+}
+  
   
 }
 
