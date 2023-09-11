@@ -5,6 +5,10 @@ if(!globalThis.decodeCount){
   globalThis.decodeCount=0;
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 globalThis.sleep=function(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
