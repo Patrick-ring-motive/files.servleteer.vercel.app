@@ -241,7 +241,13 @@ void async function DedicatedWindow() {
     async function processWorkerMessage(func,values){
         let workerId = getWorkerMessageId();
         let workerFunction = func;
-        globalThis.decodeWorker.postMessage([workerId,workerFunction,values]);
+        globalThis.decodeWorker.postMessage(
+          JSON.parse(
+          JSON.stringify(
+            [workerId,workerFunction,values]
+          )
+          )
+        );
         let workerPromise = workerMessageMap.get(workerId).promise;
         let workerReturnValue = await workerPromise;
         setTimeout(X=>workerMessageMap.delete(workerId),100);
