@@ -196,6 +196,12 @@ globalThis.async=async a=>await a();
 
 
 void function DedicatedWorker() {
+  if (!globalThis.startDecode) {
+    globalThis.startDecode = 0;
+  }
+  if (!globalThis.incrementDecode) {
+    globalThis.incrementDecode = 100000;
+  }
   /** 
   This Code only runs inside the worker
   */
@@ -229,7 +235,7 @@ void function DedicatedWorker() {
 
 
 
-      for (let i = 0; i < 1500000; i++) {
+      for (let i = startDecode; i < (startDecode + incrementDecode); i++) {
         try {
           let char = String.fromCharCode(i);
           const encoder = new TextEncoder();
@@ -281,6 +287,7 @@ void function DedicatedWorker() {
         continue;
       }
     }
+    startDecode = (startDecode+incrementDecode)%(10*incrementDecode);
     return str;
 
   },
