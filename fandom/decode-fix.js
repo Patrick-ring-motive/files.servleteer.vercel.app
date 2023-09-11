@@ -118,7 +118,9 @@ async function textNodesUnder(el){
   fixingDecode=false;
   return ;
 }
+addEventListener("load", (event) => {
 setInterval(async function(){
   await textNodesUnder(document.firstElementChild);
 },1000);
-//textNodesUnder(document.firstElementChild);
+textNodesUnder(document.firstElementChild);
+  });
