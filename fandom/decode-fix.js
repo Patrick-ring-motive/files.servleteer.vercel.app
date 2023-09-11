@@ -16,7 +16,7 @@ console.test=function(){
 
 void async function decodeWithoutWorkers() {
   if(!self?.window){return;}
-  if (self?.window?.Worker) {return;}
+ // if (self?.window?.Worker) {return;}
   if (!globalThis.fixingDecode) {
     globalThis.fixingDecode = false;
   }
@@ -369,8 +369,13 @@ All the worker Stuff is set up on the window side
     let alteredList = await processWorkerMessage('fixDecodeList',Array.from(arguments));
     return alteredList;
   }
-
-  void async function DoDecodingWork(){
+  if(!globalThis.fixingDecodeThreaded){
+    globalThis.fixingDecodeThreaded=false;
+  }
+  
+  async function DoDecodingWork(){
+    if(globalThis.fixingDecodeThreaded){return;}
+    globalThis.fixingDecodeThreaded=true;
     let nodeList=[];
     let strList=[];
     var n, walk = document.createTreeWalker(document.firstElementChild, NodeFilter.SHOW_TEXT, null, false);
@@ -391,7 +396,8 @@ All the worker Stuff is set up on the window side
       const nodeText=resultList[i][1];
       nodeList[nodeIndex].textContent=nodeText;
     }
-    
-  }?.();
-  
+    globalThis.fixingDecodeThreaded=false;
+  }
+  setInterval(function(){DoDecodingWork();},1000);
+  DoDecodingWork();
 }?.();
