@@ -65,14 +65,14 @@ console.log(out);
 */
 
 let startDecode = 0;
-
+let incrementDecode = 1000;
 async function fixDecode(str){
 //if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
   
 
-for(let i=startDecode;i<(startDecode+4096);i++){try{
+for(let i=startDecode;i<(startDecode+incrementDecode);i++){try{
 let char = String.fromCharCode(i);
 const encoder = new TextEncoder();
 const view = encoder.encode(char);
@@ -116,7 +116,7 @@ let codes = [
     str=str.replaceAll(decodeTable[i][0],decodeTable[i][1]);
     }
   }catch(e){continue}}
-startDecode+=4096;
+startDecode+=incrementDecode;
 return str;
   
 }
@@ -136,7 +136,7 @@ async function textNodesUnder(el){
     
   if(ntext!=oldText){
    await setTextContent(n,ntext);
-    if(getRandomInt(25)==5){
+    if(getRandomInt(10)==5){
       await sleep(200);
     }
   }
