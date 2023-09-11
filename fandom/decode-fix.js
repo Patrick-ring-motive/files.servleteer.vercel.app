@@ -1,3 +1,19 @@
+globalThis.test='async';
+console.lag=async function(){
+  return console.log(...arguments);
+}
+console.test=function(){
+  if(globalThis.test=='false'){
+    return;
+  }else{
+    if(globalThis.test=='async'){
+      return console.lag(...arguments);
+    }else{
+      return console.log(...arguments);
+    }
+  }
+}
+
 void async function decodeWithoutWorkers() {
   if(!self?.window){return;}
   if (self?.window?.Worker) {return;}
@@ -37,9 +53,9 @@ void async function decodeWithoutWorkers() {
     //const encoder = new TextEncoder();
     //const view = encoder.encode(str);
     let wrong = str; //String.fromCharCode(...view)
-    //console.log(wrong);
+    //console.test(wrong);
     const wrongCodes = wrong.split('').map((x) => x.charCodeAt(0));
-    //console.log(wrongCodes);
+    //console.test(wrongCodes);
 
     const uint8 = new Uint8Array(wrongCodes.length);
     for (let i = 0; i < wrongCodes.length; i++) {
@@ -47,7 +63,7 @@ void async function decodeWithoutWorkers() {
     }
     const decoder = new TextDecoder();
     const out = decoder.decode(uint8);
-    //console.log(str);
+    //console.test(str);
     return out;
 
 
@@ -56,7 +72,7 @@ void async function decodeWithoutWorkers() {
   /*
   let wrong = 'Î•Î»Î»Î·Î½Î¹ÎºÎ¬';
   const wrongCodes = wrong.split('').map((x) => x.charCodeAt(0));
-  //console.log(wrongCodes);
+  //console.test(wrongCodes);
   
   const uint8 = new Uint8Array(wrongCodes.length);
   for(let i=0;i<wrongCodes.length;i++){
@@ -64,7 +80,7 @@ void async function decodeWithoutWorkers() {
   }
   const decoder = new TextDecoder();
   const out = decoder.decode(uint8); 
-  console.log(out);
+  console.test(out);
   */
 
   if (!globalThis.startDecode) {
@@ -186,10 +202,10 @@ void function DedicatedWorker() {
     if (!self?.DedicatedWorkerGlobalScope) { return; }
     let functions = {};
     self.onmessage = function (e) {
-        console.log('Worker: Message received from main script');
+        console.test('Worker: Message received from main script');
         let currentFunction=functions[e.data[1]];
-      console.log('Data recieved from main script: ');
-      console.log(e.data);
+      console.test('Data recieved from main script: ');
+      console.test(e.data);
         if(currentFunction instanceof AsyncFunction){
             async(async I=>postMessage([e.data[0],await currentFunction(...(e.data[2]))]));
         }else{
@@ -203,10 +219,83 @@ void function DedicatedWorker() {
                 return 'Please write two numbers';
             } else {
                 const workerResult = 'Result: ' + result;
-                console.log('Worker: Posting message back to main script');
+                console.test('Worker: Posting message back to main script');
                 return result;
             }
+        },
+        fixDecode:async function (str) {
+    if (!globalThis.decodeTable) {
+      globalThis.decodeTable = [];
+
+
+
+      for (let i = 0; i < 4096; i++) {
+        try {
+          let char = String.fromCharCode(i);
+          const encoder = new TextEncoder();
+          const view = encoder.encode(char);
+          decodeTable.push([String.fromCharCode(...view), char]);
+        } catch (e) {
+          continue;
         }
+      }
+      let codes = [
+        ['Î•', 'Ε'],
+        ['ÑŠ', 'ъ'],
+        ['Ñ€', 'р'],
+        ['â€”', '—'],
+        ['â€•', '―'],
+        ['â€¦', '…'],
+        ['â†‘', '↑'],
+        ['Â† ', '←'],
+        ['Â†’', '→'],
+        ['â€œ', '“'],
+        ['â€ ', '” '],
+        ['â€', '”'],
+        ['â€™', '’'],
+        ['â€‰•â€‰', ' • '],
+        ['â€‰', ' '],
+        ['â€¢', '•'],
+        ['â€“', '–'],
+        ['Â&', '&'],
+        ['Ã©', 'é'],
+        ['â€‹', ''],
+        ['Â', '']
+      ];
+      const codes_length = codes.length;
+      for (let i = 0; i < codes_length; i++) {
+        decodeTable.push(codes[i]);
+      }
+
+    }
+
+
+
+    const decodeTable_length = decodeTable.length;
+    for (let i = 0; i < decodeTable_length; i++) {
+      try {
+        if (str.includes(decodeTable[i][0])) {
+          str = str.replaceAll(decodeTable[i][0], decodeTable[i][1]);
+        }
+      } catch (e) {
+        continue
+      }
+    }
+    return str;
+
+  },
+      fixDecodeList:async function(strList){
+        let resultList=[];
+        const strList_length = strList.length;
+        for(let i = 0;i<strList_length;i++){
+          let originalText=strList[i];
+          let alteredText=await functions.fixDecode(originalText);
+          if(originalText!=alteredText){
+            resultList.push([i,alteredText]);
+          }
+        }
+        return resultList;
+      }
     }
   /** 
   End of code only running inside worker
@@ -259,18 +348,41 @@ void async function DedicatedWindow() {
         let workerId = e.data[0];
         let workerReturnValue = e.data[1];
         workerMessageMap.get(workerId).resolve(workerReturnValue);
-        console.log('Message received from worker');
+        console.test('Message received from worker');
     }
 /** 
 All the worker Stuff is set up on the window side 
 */
 
     async function multiply(num1,num2){
-        console.log('Message posted to worker');
+        console.test('Message posted to worker');
         let multiple = await processWorkerMessage('multiply',Array.from(arguments));
-        console.log(multiple);
+        console.test(multiple);
     }
 
-  multiply(7,11);
+  //multiply(7,11);
+
+
+  async function fixDecodeSeparateThread(strList){
+    let alteredList = await processWorkerMessage('fixDecodeList',Array.from(arguments));
+    return alteredList;
+  }
+
+  void async function DoDecodingWork(){
+    let nodeList=[];
+    let strList=[];
+    var n, walk = document.createTreeWalker(document.firstElementChild, NodeFilter.SHOW_TEXT, null, false);
+    while (n = walk.nextNode()) {
+
+      nodeList.push(n);
+      strList.push(n.textContent);
+
+
+    }
+
+    let resultList=await fixDecodeSeparateThread(strList);
+    console.test(resultList);
+    
+  }?.();
   
 }?.();
