@@ -67,7 +67,7 @@ console.log(out);
 let startDecode = 0;
 let incrementDecode = 1000;
 async function fixDecode(str){
-//if(!globalThis.decodeTable){
+if(!globalThis.decodeTable){
 globalThis.decodeTable=[];
 
   
@@ -106,7 +106,7 @@ let codes = [
     decodeTable.push(codes[i]);
   }
   
-//}
+}
 
   
 
