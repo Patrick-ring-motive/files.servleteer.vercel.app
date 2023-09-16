@@ -90,6 +90,17 @@ for(let i=0;i<dataImages_length;i++){
     dataImages[i].src=dataImages[i].parentElement.href;
 }
 
+dataImages = document.querySelectorAll('img.mobile-gallery__placeholder[src^="data"][data-src]:not([error])');
+const dataImages_length=dataImages.length;
+for(let i=0;i<dataImages_length;i++){
+  let osrc=dataImages[i].src;
+  dataImages[i].onerror=function(){
+    this.setAttribute('error',this.src);
+    this.src=osrc;
+  }
+    dataImages[i].src=dataImages[i].getAttribute('data-src');
+}
+
 let lazyImages=document.querySelectorAll(`[class*="lazyload"]:not([error])`);
 const lazyImages_length=lazyImages.length;
   for(let i=0;i<lazyImages_length;i++){
