@@ -1,3 +1,7 @@
+if(!localStorage.getItem('firstTime')){
+  localStorage.setItem('firstTime','nope');
+  window.location.href=window.location.href;
+}
 globalThis.Q = U => { try { return U(); } catch (e) { return undefined; } };
 if(!globalThis.the){globalThis.the= {};}
 
