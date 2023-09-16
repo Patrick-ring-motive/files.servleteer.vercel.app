@@ -78,11 +78,15 @@ let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]:
 const dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
   let osrc=dataImages[i].src;
-  dataImages[i].onerror=function(){this.setAttribute('error',this.src);this.src=osrc;}
+  dataImages[i].onerror=function(){
+    this.setAttribute('error',this.src);
+    this.src=osrc;
+    this.setAttribute('class',this.getAttribute('class')+' lazyload');
+  }
     dataImages[i].src=dataImages[i].parentElement.href;
 }
 
-let lazyImages=document.querySelectorAll(`[class*="lazyload"]`);
+let lazyImages=document.querySelectorAll(`[class*="lazyload"]:not([error])`);
 const lazyImages_length=lazyImages.length;
   for(let i=0;i<lazyImages_length;i++){
     lazyImages[i].setAttribute('class',lazyImages[i].getAttribute('class')
