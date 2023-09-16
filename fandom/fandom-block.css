@@ -59,6 +59,6 @@ iframe
 }
 
 
-img.lazyload[error]{
+img[error]{
   visibility:hidden !important;
 }
