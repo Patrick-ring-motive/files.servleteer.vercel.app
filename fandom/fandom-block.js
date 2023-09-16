@@ -82,6 +82,9 @@ try{
 let lazyImages=document.querySelectorAll(`[class*="lazyload"]:not([error])`);
 let lazyImages_length=lazyImages.length;
   for(let i=0;i<lazyImages_length;i++){
+  if(lazyImages[i].getAttribute('error')){
+    continue;
+  }
     lazyImages[i].setAttribute('class',lazyImages[i].getAttribute('class')
                                .replaceAll('lazyload',''));
   }
@@ -90,6 +93,9 @@ let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]:
 let dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
   let osrc=dataImages[i].src;
+  if(dataImages[i].getAttribute('error')){
+    continue;
+  }
   dataImages[i].onerror=function(){
     this.setAttribute('error',this.src);
     this.src=osrc;
@@ -101,6 +107,9 @@ for(let i=0;i<dataImages_length;i++){
 dataImages = document.querySelectorAll('img.mobile-gallery__placeholder[src^="data"][data-src]:not([error])');
 dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
+    if(dataImages[i].getAttribute('error')){
+    continue;
+  }
   let osrc=dataImages[i].src;
   dataImages[i].onerror=function(){
     this.setAttribute('error',this.src);
@@ -112,6 +121,9 @@ for(let i=0;i<dataImages_length;i++){
 lazyImages=document.querySelectorAll(`[class*="lazyload"]:not([error])`);
 lazyImages_length=lazyImages.length;
   for(let i=0;i<lazyImages_length;i++){
+      if(lazyImages[i].getAttribute('error')){
+    continue;
+  }
     lazyImages[i].setAttribute('class',lazyImages[i].getAttribute('class')
                                .replaceAll('lazyload',''));
   }
