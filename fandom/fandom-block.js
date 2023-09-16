@@ -73,6 +73,7 @@ let wikia_php=document.querySelector('[href^="https://'+apiHost+'/corsFetch/"][h
     form_action.setAttribute('action',form_action.getAttribute('action').replace('.fandom.com','-wikia.lenguapedia.org'));
   }
 
+try{
 let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]:not[error]');
 const dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
@@ -87,7 +88,7 @@ const lazyImages_length=lazyImages.length;
     lazyImages[i].setAttribute('class',lazyImages[i].getAttribute('class')
                                .replaceAll('lazyload',''));
   }
-      
+}catch(e){console.log(e.message);}  
 removeLinkListeners();
  // oddballLinks();
   removeUnwantedScripts();
