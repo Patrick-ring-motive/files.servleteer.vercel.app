@@ -78,6 +78,14 @@ let wikia_php=document.querySelector('[href^="https://'+apiHost+'/corsFetch/"][h
   }
 
 try{
+
+let lazyImages=document.querySelectorAll(`[class*="lazyload"]:not([error])`);
+let lazyImages_length=lazyImages.length;
+  for(let i=0;i<lazyImages_length;i++){
+    lazyImages[i].setAttribute('class',lazyImages[i].getAttribute('class')
+                               .replaceAll('lazyload',''));
+  }
+  
 let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]:not([error])');
 let dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
@@ -101,8 +109,8 @@ for(let i=0;i<dataImages_length;i++){
     dataImages[i].src=dataImages[i].getAttribute('data-src');
 }
 
-let lazyImages=document.querySelectorAll(`[class*="lazyload"]:not([error])`);
-const lazyImages_length=lazyImages.length;
+lazyImages=document.querySelectorAll(`[class*="lazyload"]:not([error])`);
+lazyImages_length=lazyImages.length;
   for(let i=0;i<lazyImages_length;i++){
     lazyImages[i].setAttribute('class',lazyImages[i].getAttribute('class')
                                .replaceAll('lazyload',''));
