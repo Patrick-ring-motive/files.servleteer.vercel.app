@@ -79,7 +79,7 @@ let wikia_php=document.querySelector('[href^="https://'+apiHost+'/corsFetch/"][h
 
 try{
 let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]:not([error])');
-const dataImages_length=dataImages.length;
+let dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
   let osrc=dataImages[i].src;
   dataImages[i].onerror=function(){
@@ -91,7 +91,7 @@ for(let i=0;i<dataImages_length;i++){
 }
 
 dataImages = document.querySelectorAll('img.mobile-gallery__placeholder[src^="data"][data-src]:not([error])');
-const dataImages_length=dataImages.length;
+dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
   let osrc=dataImages[i].src;
   dataImages[i].onerror=function(){
