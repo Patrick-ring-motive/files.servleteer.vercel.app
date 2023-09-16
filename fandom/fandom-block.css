@@ -57,3 +57,8 @@ iframe
 .search-modal__content{
   visibility:hidden !important;
 }
+
+
+img.lazyload[error]{
+  visibility:hidden !important;
+}
