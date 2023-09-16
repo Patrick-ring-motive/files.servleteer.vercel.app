@@ -59,6 +59,6 @@ iframe
 }
 
 
-img[error]:not([load-src]){
+img[error][load-src]{
   visibility:hidden !important;
 }
