@@ -97,6 +97,9 @@ for(let i=0;i<dataImages_length;i++){
     continue;
   }
   dataImages[i].onerror=function(){
+    if(this.getAttribute('error')){
+      return;
+    }
     this.setAttribute('error',this.src);
     this.src=osrc;
     this.setAttribute('class',this.getAttribute('class')+' lazyload');
@@ -112,6 +115,9 @@ for(let i=0;i<dataImages_length;i++){
   }
   let osrc=dataImages[i].src;
   dataImages[i].onerror=function(){
+    if(this.getAttribute('error')){
+      return;
+    }
     this.setAttribute('error',this.src);
     this.src=osrc;
   }
