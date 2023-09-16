@@ -77,7 +77,7 @@ let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]'
 const dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
   let osrc=dataImages[i].src;
-  dataImages.onerror=function(){this.src=osrc;}
+  dataImages[i].onerror=function(){this.src=osrc;}
     dataImages[i].src=dataImages[i].parentElement.href;
 }
 
