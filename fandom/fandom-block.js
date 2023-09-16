@@ -79,6 +79,12 @@ for(let i=0;i<dataImages_length;i++){
     dataImages[i].src=dataImages[i].parentElement.href;
 }
 
+let lazyImages=document.querySelectorAll(`[class*="lazyload"]`);
+const lazyImages_length=lazyImages.length;
+  for(let i=0;i<lazyImages_length;i++){
+    lazyImages[i].setAttribute('class',lazyImages[i].getAttribute('class')
+                               .replaceAll('lazyload',''));
+  }
       
 removeLinkListeners();
  // oddballLinks();
