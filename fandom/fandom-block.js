@@ -98,7 +98,7 @@ for(let i=0;i<dataImages_length;i++){
   }
   dataImages[i].onerror=function(){
     if(this.getAttribute('error')){
-    // this.setAttribute('load-src',this.src);
+     this.setAttribute('load-src',this.src);
       return;
     }
     this.setAttribute('error',this.src);
@@ -120,7 +120,7 @@ for(let i=0;i<dataImages_length;i++){
   let osrc=dataImages[i].src;
   dataImages[i].onerror=function(){
     if(this.getAttribute('error')){
-      //this.setAttribute('load-src',this.src);
+      this.setAttribute('load-src',this.src);
       return;
     }
     this.setAttribute('error',this.src);
