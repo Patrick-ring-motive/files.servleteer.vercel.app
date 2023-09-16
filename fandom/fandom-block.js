@@ -74,7 +74,7 @@ let wikia_php=document.querySelector('[href^="https://'+apiHost+'/corsFetch/"][h
   }
 
 try{
-let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]:not[error]');
+let dataImages = document.querySelectorAll('a.image[href*="."]>img[src^="data"]:not([error])');
 const dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
   let osrc=dataImages[i].src;
