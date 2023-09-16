@@ -104,6 +104,9 @@ for(let i=0;i<dataImages_length;i++){
     this.src=osrc;
     this.setAttribute('class',this.getAttribute('class')+' lazyload');
   }
+    dataImages[i].onload=function(){
+    this.setAttribute('load-src',this.src);
+  }
     dataImages[i].src=dataImages[i].parentElement.href;
 }
 
@@ -120,6 +123,9 @@ for(let i=0;i<dataImages_length;i++){
     }
     this.setAttribute('error',this.src);
     this.src=osrc;
+  }
+  dataImages[i].onload=function(){
+    this.setAttribute('load-src',this.src);
   }
     dataImages[i].src=dataImages[i].getAttribute('data-src');
 }
