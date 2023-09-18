@@ -111,7 +111,7 @@ for(let i=0;i<dataImages_length;i++){
     dataImages[i].src=dataImages[i].parentElement.href;
 }
 
-dataImages = document.querySelectorAll('img.mobile-gallery__placeholder[src^="data"][data-src]:not([error])');
+dataImages = document.querySelectorAll('img.mobile-gallery__placeholder[src^="data"][data-src]:not([error]),img.article-media-placeholder[src^="data"][data-src]:not([error])');
 dataImages_length=dataImages.length;
 for(let i=0;i<dataImages_length;i++){
     if(dataImages[i].getAttribute('error')){
