@@ -11,7 +11,7 @@ void async function LinkResolverDNS(){
 doInterval(async function(){
 
 
-let relativeLinks = document.querySelectorAll('a[href^="/"],a[href^="./"],a[href^="../"]');
+let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="../"]');
     const relativeLinks_length = relativeLinks.length;
     for (let i = 0; i < relativeLinks_length; i++) {
       try {
