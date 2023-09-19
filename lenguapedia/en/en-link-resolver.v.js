@@ -7,7 +7,7 @@ void async function LinkResolver() {
   let hostListQuery = 'hostListQuery';
 
   setInterval(async function() {
-    hostListQuery = 'hostListQuery';
+    hostListQuery = `[href*="wikipedia.org"]:not([href*="lenguapedia"])`;
     for (let i = 0; i < hostList_length; i++) {
       hostListQuery = hostListQuery + ',' + `[href*="/` + hostList[i] + `"]`;
       hostListQuery = hostListQuery + ',' + `[href*="/www.` + hostList[i] + `"]`;
@@ -23,7 +23,7 @@ void async function LinkResolver() {
       }
     }
 
-    hostListQuery = 'hostListQuery';
+    hostListQuery = '[src*="wikipedia.org"]:not([src*="lenguapedia"])';
     for (let i = 0; i < hostList_length; i++) {
       hostListQuery = hostListQuery + ',' + `[src*="/` + hostList[i] + `"]`;
       hostListQuery = hostListQuery + ',' + `[src*="/www.` + hostList[i] + `"]`;
@@ -41,7 +41,7 @@ void async function LinkResolver() {
 
 
 
-    hostListQuery = 'hostListQuery';
+    hostListQuery = '[data-src*="wikipedia.org"]:not([data-src*="lenguapedia"])';
     for (let i = 0; i < hostList_length; i++) {
       hostListQuery = hostListQuery + ',' + `[data-src*="/` + hostList[i] + `"]`;
       hostListQuery = hostListQuery + ',' + `[data-src*="/www.` + hostList[i] + `"]`;
@@ -58,7 +58,7 @@ void async function LinkResolver() {
     }
 
 
-    hostListQuery = 'hostListQuery';
+    hostListQuery = '[style="wikipedia.org"]:not([style*="lenguapedia"])';
     for (let i = 0; i < hostList_length; i++) {
       hostListQuery = hostListQuery + ',' + `[style*="/` + hostList[i] + `"]`;
       hostListQuery = hostListQuery + ',' + `[style*="/www.` + hostList[i] + `"]`;
