@@ -96,7 +96,7 @@ void async function LinkResolver() {
       }
     }
 
-    let defaultHosts=document.querySelectorAll(`[href*="wikipedia.org"]:not([href*="lenguapedia"])`);
+    let defaultHosts=document.querySelectorAll(`[href*="wikipedia.org"]:not([href*="lenguapedia"]),[href*="lenguapedia-en.vercel.app"]`);
     let defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].href;
@@ -105,7 +105,7 @@ void async function LinkResolver() {
     defaultHosts[i].href=durl.join('/');
     }
 
-    defaultHosts=document.querySelectorAll(`[src*="wikipedia.org"]:not([src*="lenguapedia"])`);
+    defaultHosts=document.querySelectorAll(`[src*="wikipedia.org"]:not([src*="lenguapedia"]),[src*="lenguapedia-en.vercel.app"]`);
     defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].src;
