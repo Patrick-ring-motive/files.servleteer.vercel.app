@@ -82,6 +82,7 @@ void async function LinkResolver() {
   (async function fixMainCss() {
     let mainLink = document.querySelector('link[rel="stylesheet"][href*="load.php"]');
     if (!mainLink) { return setTimeout(async function() { fixMainCss(); }, 200); }
+    if(!globalThis.nativeFetch){globalThis.nativeFetch=fetch;};
     let mainCss = await (await nativeFetch(mainLink.href)).text();
     let mainStyle = document.createElement('style');
     mainStyle.innerHTML = mainCss;
