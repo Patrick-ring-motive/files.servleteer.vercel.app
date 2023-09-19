@@ -1,4 +1,5 @@
 //intercept and redirect fetch requests
+/*
 window.Response.redirect = window.Response.customRedirect;
 
 
@@ -223,3 +224,4 @@ window.customFetch = async function(request, headers) {
 
 }
 window.fetch = window.customFetch;
+*/
