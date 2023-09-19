@@ -101,7 +101,7 @@ void async function LinkResolver() {
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].href;
     durl=durl.split('/');
-    durl[2]=window.location.href;
+    durl[2]=window.location.host;
     defaultHosts[i].href=durl.join('/');
     }
 
@@ -110,9 +110,10 @@ void async function LinkResolver() {
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].src;
     durl=durl.split('/');
-    durl[2]=window.location.href;
+    durl[2]=window.location.host;
     defaultHosts[i].src=durl.join('/');
     }
+
 
 
     
