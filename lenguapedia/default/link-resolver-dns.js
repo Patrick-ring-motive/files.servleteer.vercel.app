@@ -20,8 +20,8 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
 
       } catch (e) { continue; }
     }
-    let relativeSrc = document.querySelectorAll('[src^="/"],[src^="./"],[src^="../"]');
-    const relativeSrc_length = relativeSrc.length;
+    let relativeSrc = document.querySelectorAll('[src^="/"]:not(script),[src^="./"]:not(script),[src^="../"]:not(script)');
+    let relativeSrc_length = relativeSrc.length;
     for (let i = 0; i < relativeSrc_length; i++) {
       try {
 
@@ -30,6 +30,16 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
       } catch (e) { continue; }
     }
 
+    relativeSrc = document.querySelectorAll('script[src^="/"],script[src^="./"],script[src^="../"]');
+    relativeSrc_length = relativeSrc.length;
+    for (let i = 0; i < relativeSrc_length; i++) {
+      try {
+
+        relativeSrc[i].setAttribute('src', relativeSrc[i].src);
+        document.body.appendChild(relativeSrc[i].cloneNode(true));
+
+      } catch (e) { continue; }
+    }
 
 
     let defaultHosts=document.querySelectorAll(`[href^="https://"][href*="wikipedia.org"]:not([href*="lenguapedia"],[window-location-host]),[href^="https://"][href*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
