@@ -96,22 +96,24 @@ void async function LinkResolver() {
       }
     }
 
-    let defaultHosts=document.querySelectorAll(`[href^="https://"][href*="wikipedia.org"]:not([href*="lenguapedia"]),[href^="https://"][href*="lenguapedia-en.vercel.app"]`);
+    let defaultHosts=document.querySelectorAll(`[href^="https://"][href*="wikipedia.org"]:not([href*="lenguapedia"],[window-location-host]),[href^="https://"][href*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
     let defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].href;
     durl=durl.split('/');
     durl[2]=window.location.host;
     defaultHosts[i].href=durl.join('/');
+    defaultHosts[i].setAttribute('window-location-host',window.location.host);
     }
 
-    defaultHosts=document.querySelectorAll(`[src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia"]),[src^="https://"][src*="lenguapedia-en.vercel.app"]`);
+    defaultHosts=document.querySelectorAll(`[src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia"],[window-location-host])),[src^="https://"][src*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
     defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].src;
     durl=durl.split('/');
     durl[2]=window.location.host;
     defaultHosts[i].src=durl.join('/');
+        defaultHosts[i].setAttribute('window-location-host',window.location.host);
     }
 
 
