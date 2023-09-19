@@ -45,7 +45,8 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
     let defaultHosts=document.querySelectorAll(`
     [href^="https://"][href*="wikipedia.org"]:not([href*="lenguapedia"],[window-location-host]),
     [href^="https://"][href*="lenguapedia-en.vercel.app"]:not([window-location-host]),
-    [href^="https://"][href*="org.translate.goog"]:not([window-location-host])`);
+    [href^="https://"][href*="org.translate.goog"]:not([window-location-host]),
+    [href^="https://"][href*="app.translate.goog"]:not([window-location-host])`);
     let defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].href;
