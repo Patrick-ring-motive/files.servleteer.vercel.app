@@ -79,6 +79,26 @@ void async function LinkResolver() {
       }
     }
 
+    let defaultHosts=document.querySelectorAll(`[href*="wikipedia.org"]:not([href*="lenguapedia"])`);
+    let defaultHosts_length=defaultHosts.length;
+    for(let i=0;i<defaultHosts_length;i++){
+    let durl=defaultHosts[i].href;
+    durl=durl.split('/');
+    durl[2]=window.location.href;
+    defaultHosts[i].href=durl.join('/');
+    }
+
+    defaultHosts=document.querySelectorAll(`[src*="wikipedia.org"]:not([src*="lenguapedia"])`);
+    defaultHosts_length=defaultHosts.length;
+    for(let i=0;i<defaultHosts_length;i++){
+    let durl=defaultHosts[i].src;
+    durl=durl.split('/');
+    durl[2]=window.location.href;
+    defaultHosts[i].src=durl.join('/');
+    }
+
+
+    
   }, 100);
 
 
