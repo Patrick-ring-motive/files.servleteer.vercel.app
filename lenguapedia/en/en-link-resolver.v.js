@@ -1,6 +1,23 @@
 void async function LinkResolver() {
 
+    let relativeLinks = document.querySelectorAll('a[href^="/"],a[href^="./"]');
+    const relativeLinks_length = relativeLinks.length;
+    for (let i = 0; i < relativeLinks_length; i++) {
+      try {
 
+        relativeLinks[i].setAttribute('href', relativeLinks[i].href);
+
+      } catch (e) { continue; }
+    }
+    let relativeSrc = document.querySelectorAll('[src^="/"],[src^="./"]');
+    const relativeSrc_length = relativeSrc.length;
+    for (let i = 0; i < relativeSrc_length; i++) {
+      try {
+
+        relativeSrc[i].setAttribute('src', relativeSrc[i].src);
+
+      } catch (e) { continue; }
+    }
   const hostProxy = window.location.host;
   let hostList = [];
   try{
