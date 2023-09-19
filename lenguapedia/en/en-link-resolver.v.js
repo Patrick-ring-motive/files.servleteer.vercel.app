@@ -106,7 +106,7 @@ void async function LinkResolver() {
     defaultHosts[i].setAttribute('window-location-host',window.location.host);
     }
 
-    defaultHosts=document.querySelectorAll(`[src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia"],[window-location-host])),[src^="https://"][src*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
+    defaultHosts=document.querySelectorAll(`[src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia"],[window-location-host]),[src^="https://"][src*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
     defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].src;
