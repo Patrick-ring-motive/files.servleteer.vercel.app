@@ -68,7 +68,7 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
         defaultHosts[i].setAttribute('window-location-host',window.location.host);
     }
     
-    defaultHosts=document.querySelectorAll(`link[href*="load.php"]:not([href*="api.lenguapedia.org"]):not([api-style])`);
+    defaultHosts=document.querySelectorAll(`link[href*="load.php"]:not([href*="api.lenguapedia.org/corsFetch"]):not([api-style])`);
     defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].href;
