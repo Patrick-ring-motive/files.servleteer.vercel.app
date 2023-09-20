@@ -75,7 +75,7 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
     durl=durl.split('/');
     durl[2]="en.wikipedia.org";
     
-    let newhref="https://api.lenguapedia.org/corsFetch/"+durl.join('/');
+    let newhref="https://api.lenguapedia.org/corsFetchStyles/"+durl.join('/');
     defaultHosts[i].setAttribute('api-style',newhref);    
     let newlink=document.createElement('link');
         //newlink.setAttribute('type',defaultHosts[i].getAttribute('type'));
