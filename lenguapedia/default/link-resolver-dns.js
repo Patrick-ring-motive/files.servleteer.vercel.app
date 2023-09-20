@@ -67,6 +67,22 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
     defaultHosts[i].src=durl.join('/');
         defaultHosts[i].setAttribute('window-location-host',window.location.host);
     }
+    
+    defaultHosts=document.querySelectorAll(`link[href*="load.php"]:not([href*="api.lenguapedia.org"]):not([api-style])`);
+    defaultHosts_length=defaultHosts.length;
+    for(let i=0;i<defaultHosts_length;i++){
+    let durl=defaultHosts[i].href;
+    durl=durl.split('/');
+    durl[2]="en.wikipedia.org";
+    
+    let newhref="https://api.lenguapedia.org/corsFetchStyles/"+durl.join('/');
+    defaultHosts[i].setAttribute('api-style',newhref);    
+    let newlink=document.createElement('link');
+        //newlink.setAttribute('type',defaultHosts[i].getAttribute('type'));
+        newlink.setAttribute('rel',defaultHosts[i].getAttribute('rel'));
+        newlink.href=newhref;
+        document.body.appendChild(newlink);
+    }
 
 
 
