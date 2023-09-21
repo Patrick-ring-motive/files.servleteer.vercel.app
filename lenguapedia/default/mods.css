@@ -97,6 +97,12 @@ background-color:#cce9ff !important;
 {
   opacity:1 !important;
   visibility:visible !important;
+  width:100%;
+}
+
+[id="p-donation"]
+{
+display:none;
 }
 
 #mw-mf-main-menu-button:before{
