@@ -25,6 +25,10 @@ void async function InjectLangs(){
     if(window.location.href.includes('uselang=')){
      uselang='uselang='+window.location.href.split('uselang=')[1].split('&')[0].split('#')[0];
     }
+  if(uselang.length<9){
+     uselang='uselang='+window.location.host.split('.')[0];
+  }
+    
    hrefs_length = hrefs.length;
     for (let i = 0; i < hrefs_length; i++) {
       try {
