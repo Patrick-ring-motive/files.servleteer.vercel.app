@@ -75,11 +75,13 @@ await import('/public/js/import/c-s-e.js');
     await formatSnip();
 
     let mres=json?.response||json;
+    console.log(mres);
     try{
      mres = modifyResponse(mres);
     }catch(e){
       mres = e.message;
     }
+    console.log(mres);
     return mres;
   }
 
