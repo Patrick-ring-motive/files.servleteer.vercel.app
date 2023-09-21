@@ -15,7 +15,7 @@ console.log(refererHost, window.location.host);
 let lowcation=window.location.href.toLowerCase();
 
 if(lowcation.includes('referer=')){
-  let refererHost=decodeURIComponent(lowcation.split('referer=')[1].split('&')[0].split('#')[0]);
+  let refererHost=decodeURIComponent(lowcation.split('referer=')[1].split('&')[0].split('#')[0]).replaceAll('+','.');
   if(refererHost&&(refererHost!=window.location.host)&&refererHost.includes('lenguapedia.org')&&(!window.location.host.includes('lenguapedia.org'))){
 console.log(refererHost, window.location.host);
     let window_location=window.location.href.split('/');
@@ -37,7 +37,7 @@ console.log(refererHost, window.location.host);
         if(original.includes('?')){
           char='&';
         }
-        hrefStatic[i].setAttribute('href', original+char+'referer='+encodeURIComponent(window.location.origin));
+        hrefStatic[i].setAttribute('href', original+char+'referer='+encodeURIComponent(window.location.origin.replaceAll('.','+'));
       } catch (e) { continue; }
     }
     
