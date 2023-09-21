@@ -100,7 +100,9 @@ background-color:#cce9ff !important;
   width:100%;
 }
 
-[id="p-donation"]
+[id="p-donation"],
+[id="pt-preferences"],
+[id="p-personal"]
 {
 display:none;
 }
