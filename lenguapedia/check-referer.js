@@ -24,5 +24,23 @@ console.log(refererHost, window.location.host);
     referer.remove();
   }
 }  
+
+
+  setInterval(function(){
+
+    let hrefStatic = document.querySelectorAll('a[href^="https://"]:not([href*="referer"])');
+    const hrefStatic_length = hrefStatic.length;
+    for (let i = 0; i < hrefStatic_length; i++) {
+      try {
+        let char = '?';
+        let original = hrefStatic[i].href;
+        if(original.includes('?')){
+          char='&';
+        }
+        hrefStatic[i].setAttribute('href', original+char+'referer='+window.location.origin);
+      } catch (e) { continue; }
+    }
+    
+  },300);
   
 }();
