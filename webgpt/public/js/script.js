@@ -55,7 +55,7 @@ await import('/public/js/import/c-s-e.js');
 
   // wait until the whole message is done before printing;
   let sendMessageSync = async (username, content, messageListener) => {
-    if((content.length>69)||(Math.floor(Math.random() * 100)>69)){
+    if((content.split(' ').length>6.9)&&((content.length>69)||(Math.floor(Math.random() * 100)>69))){
     content = content + ". Let's work this out in a step by step way to be sure we have the right answer";
     }
     let data = {
