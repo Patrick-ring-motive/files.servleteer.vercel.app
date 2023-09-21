@@ -2,6 +2,7 @@
 import './import/sleep.js';
 import './import/utils.js';
 import './import/web-gpt-3.js';
+import './import/modify-response.js';
 import './import/snippets.js';
 import './import/redundant.js';
 import './import/fuzzy-fetch.js';*/
@@ -71,7 +72,7 @@ await import('/public/js/import/c-s-e.js');
     }
     await formatCode();
     await formatSnip();
-    return json.response;
+    return modifyResponse(json.response);
   }
 
   function extractTokens(text) {
