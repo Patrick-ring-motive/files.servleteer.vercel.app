@@ -83,8 +83,26 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
         newlink.href=newhref;
         document.body.appendChild(newlink);
     }
-
-
+    
+    defaultHosts=document.querySelectorAll(`[href*="xxhachexx"]`);
+    defaultHosts_length=defaultHosts.length;
+    for(let i=0;i<defaultHosts_length;i++){
+        let durl=defaultHosts[i].href;
+        durl=durl.split('xxhachexx');
+        durl[1]='';
+        durl=durl.join('');
+        defaultHosts[i].setAttribute('href',durl);
+    }
+    
+    defaultHosts=document.querySelectorAll(`[src*="xxhachexx"]`);
+    defaultHosts_length=defaultHosts.length;
+    for(let i=0;i<defaultHosts_length;i++){
+        let durl=defaultHosts[i].src;
+        durl=durl.split('xxhachexx');
+        durl[1]='';
+        durl=durl.join('');
+        defaultHosts[i].setAttribute('src',durl);
+    }
 
 },200);
 
