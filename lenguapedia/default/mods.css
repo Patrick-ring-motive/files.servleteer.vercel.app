@@ -83,11 +83,20 @@ li[class],
 table[class],
 table[bgcolor="#ffffff"],
 .breadcrumb-nav-container,
-.last-modified-bar
+.last-modified-bar,
+[id="mw-mf-page-left"],
+[id="mw-mf-page-left"] *
 {
 
 background-color:#cce9ff !important;
   
+}
+
+[id="mw-mf-page-left"],
+[id="mw-mf-page-left"] *
+{
+  opacity:1 !important;
+  visibility:visible !important;
 }
 
 #mw-mf-main-menu-button:before{
