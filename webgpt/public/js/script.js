@@ -73,7 +73,14 @@ await import('/public/js/import/c-s-e.js');
     }
     await formatCode();
     await formatSnip();
-    return modifyResponse(json.response);
+
+    let mres=json?.response||json;
+    try{
+     mres = modifyResponse(mres);
+    }catch(e){
+      mres = e.message;
+    }
+    return mres;
   }
 
   function extractTokens(text) {
