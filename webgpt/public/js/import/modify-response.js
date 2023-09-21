@@ -7,6 +7,8 @@ globalThis.modifyResponse = function (res) {
 
   res = res.replace(/Based on the information you provided earlier. /g, '');
 
+  res = res.replace(/webgpt/gi,'PatGPT');
+
   res = res.replaceAll("I'm sorry, User, ", '');
 
 
