@@ -37,7 +37,7 @@ console.log(refererHost, window.location.host);
         if(original.includes('?')){
           char='&';
         }
-        hrefStatic[i].setAttribute('href', original+char+'referer='+encodeURIComponent(window.location.origin.replaceAll('.','+'));
+        hrefStatic[i].setAttribute('href', original+char+'referer='+encodeURIComponent(window.location.origin.replaceAll('.','+')));
       } catch (e) { continue; }
     }
     
