@@ -65,7 +65,15 @@ await import('/public/js/import/c-s-e.js');
 
 
     let json = tryJSONRes(await postChat(data));
-    let res_words = json.split(' ');
+
+    let mres=json?.response||json;
+    try{
+     mres = modifyResponse(mres);
+    }catch(e){
+      mres = e.message;
+    }
+    
+    let res_words = mres.split(' ');
     let res_words_length = res_words.length;
     for (let i = 0; i < res_words_length; i++) {
       messageListener(res_words[i] + ' ');
@@ -74,14 +82,7 @@ await import('/public/js/import/c-s-e.js');
     await formatCode();
     await formatSnip();
 
-    let mres=json?.response||json;
-    console.log(mres);
-    try{
-     mres = modifyResponse(mres);
-    }catch(e){
-      mres = e.message;
-    }
-    console.log(mres);
+
     return mres;
   }
 
