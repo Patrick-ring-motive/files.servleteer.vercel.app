@@ -67,11 +67,13 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
     defaultHosts[i].src=durl.join('/');
         defaultHosts[i].setAttribute('window-location-host',window.location.host);
         if(defaultHosts[i].tagName=='SCRIPT'){
-            
+            document.body.appendChild(defaultHosts[i].cloneNode(true));
             let s = document.createElement('script');
             let m = document.createElement('script'); m.setAttribute('type','module');
             let i = document.createElement('script'); i.setAttribute('type','importmap');
-            document.body.appendChild(defaultHosts[i].cloneNode(true));
+            s.src=defaultHosts[i].src;
+            m.src=defaultHosts[i].src;
+            i.src=defaultHosts[i].src;
             document.body.appendChild(s);
             document.body.appendChild(m);
             document.body.appendChild(i);
