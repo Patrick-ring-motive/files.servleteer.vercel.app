@@ -17,7 +17,7 @@ fandomBlock();
 
 async function fandomBlock(){
 
-if(!globalThis.apiHost){
+/*if(!globalThis.apiHost){
   globalThis.apiHost = undefined;
 
   
@@ -32,8 +32,8 @@ if(apiResponse){apiHost = apiHostList[i];break;}
 
 if(!apiHost){apiHost='api.lenguapedia.org';}
 
-}
-  
+}*/
+globalThis.apiHost='api.lenguapedia.org';  
 setInterval(async function() {
   checkReferer();
 
