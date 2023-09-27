@@ -69,14 +69,12 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
         if(defaultHosts[i].tagName=='SCRIPT'){
             document.body.appendChild(defaultHosts[i].cloneNode(true));
             let s = document.createElement('script');
-            let m = document.createElement('script'); m.setAttribute('type','module');
-            let x = document.createElement('script'); x.setAttribute('type','importmap');
-            s.src=defaultHosts[i].src;
-            m.src=defaultHosts[i].src;
-            x.src=defaultHosts[i].src;
+            if(defaulHosts[i].hasAttribute('type')){
+                s.setAttribute('type',defaulHosts[i].getAttribute('type'));
+            }
+            s.src=defaultHosts[i].src;      
             document.body.appendChild(s);
-            document.body.appendChild(m);
-            document.body.appendChild(x);
+
         }
     }
     
