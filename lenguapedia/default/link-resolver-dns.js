@@ -20,6 +20,15 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
 
       } catch (e) { continue; }
     }
+    relativeLinks = document.querySelectorAll('[href^="//"]');
+    const relativeLinks_length = relativeLinks.length;
+    for (let i = 0; i < relativeLinks_length; i++) {
+      try {
+
+        relativeLinks[i].setAttribute('href', 'https:'+relativeLinks[i].href);
+
+      } catch (e) { continue; }
+    }
     let relativeSrc = document.querySelectorAll('[src^="/"]:not(script),[src^="./"]:not(script),[src^="../"]:not(script)');
     let relativeSrc_length = relativeSrc.length;
     for (let i = 0; i < relativeSrc_length; i++) {
@@ -29,6 +38,15 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
 
       } catch (e) { continue; }
     }
+    relativeSrc = document.querySelectorAll('[src^="//"]');
+        let relativeSrc_length = relativeSrc.length;
+        for (let i = 0; i < relativeSrc_length; i++) {
+          try {
+    
+            relativeSrc[i].setAttribute('src', 'https:'+relativeSrc[i].src);
+    
+          } catch (e) { continue; }
+        }
 
     relativeSrc = document.querySelectorAll('script[src^="/"],script[src^="./"],script[src^="../"]');
     relativeSrc_length = relativeSrc.length;
