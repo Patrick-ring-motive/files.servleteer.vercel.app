@@ -48,6 +48,15 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
           } catch (e) { continue; }
         }
 
+    relativeSrc = document.querySelectorAll('[data-src^="//"]');
+    relativeSrc_length = relativeSrc.length;
+        for (let i = 0; i < relativeSrc_length; i++) {
+          try {
+    
+            relativeSrc[i].setAttribute('data-src', 'https:'+relativeSrc[i].getAttribute('data-src'));
+    
+          } catch (e) { continue; }
+        }
     relativeSrc = document.querySelectorAll('script[src^="/"],script[src^="./"],script[src^="../"]');
     relativeSrc_length = relativeSrc.length;
     for (let i = 0; i < relativeSrc_length; i++) {
