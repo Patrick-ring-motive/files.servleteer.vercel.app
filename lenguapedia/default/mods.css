@@ -96,6 +96,7 @@ background-color:#cce9ff !important;
 [id="mw-mf-page-left"],
 [id="mw-mf-page-left"] *
 {
+  background-color:rgba(255,255,255,0.69);
   opacity:1 !important;
   visibility:visible !important;
   width:100%;
