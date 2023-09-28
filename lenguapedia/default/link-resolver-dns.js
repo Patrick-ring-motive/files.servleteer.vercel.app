@@ -69,8 +69,8 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
         if(defaultHosts[i].tagName=='SCRIPT'){
             document.body.appendChild(defaultHosts[i].cloneNode(true));
             let s = document.createElement('script');
-            if(defaulHosts[i].hasAttribute('type')){
-                s.setAttribute('type',defaulHosts[i].getAttribute('type'));
+            if(defaultHosts[i].hasAttribute('type')){
+                s.setAttribute('type',defaultHosts[i].getAttribute('type'));
             }
             s.src=defaultHosts[i].src;      
             document.body.appendChild(s);
