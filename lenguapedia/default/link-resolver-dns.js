@@ -57,7 +57,7 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
     
           } catch (e) { continue; }
         }
-    relativeSrc = document.querySelectorAll('script[src^="/"],script[src^="./"],script[src^="../"]');
+    relativeSrc = document.querySelectorAll('script[src^="/"]:not([state="loaded"]),script[src^="./"]:not([state="loaded"]),script[src^="../"]:not([state="loaded"])');
     relativeSrc_length = relativeSrc.length;
     for (let i = 0; i < relativeSrc_length; i++) {
       try {
@@ -84,8 +84,8 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
     }
 
     defaultHosts=document.querySelectorAll(`
-    [src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia.org"],[window-location-host]),
-    [src^="https://"][src*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
+    [src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia.org"],[window-location-host],[state="loaded"]),
+    [src^="https://"][src*="lenguapedia-en.vercel.app"]:not([window-location-host],[state="loaded"])`);
     defaultHosts_length=defaultHosts.length;
     for(let i=0;i<defaultHosts_length;i++){
     let durl=defaultHosts[i].src;
