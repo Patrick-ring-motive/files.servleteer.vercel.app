@@ -12,7 +12,7 @@ doInterval(async function(){
 
 
 let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="../"]');
-    const relativeLinks_length = relativeLinks.length;
+    let relativeLinks_length = relativeLinks.length;
     for (let i = 0; i < relativeLinks_length; i++) {
       try {
 
@@ -21,7 +21,7 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
       } catch (e) { continue; }
     }
     relativeLinks = document.querySelectorAll('[href^="//"]');
-    const relativeLinks_length = relativeLinks.length;
+    relativeLinks_length = relativeLinks.length;
     for (let i = 0; i < relativeLinks_length; i++) {
       try {
 
@@ -39,7 +39,7 @@ let relativeLinks = document.querySelectorAll('[href^="/"],[href^="./"],[href^="
       } catch (e) { continue; }
     }
     relativeSrc = document.querySelectorAll('[src^="//"]');
-        let relativeSrc_length = relativeSrc.length;
+    relativeSrc_length = relativeSrc.length;
         for (let i = 0; i < relativeSrc_length; i++) {
           try {
     
