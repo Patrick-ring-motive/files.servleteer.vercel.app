@@ -39,7 +39,8 @@ div[class="eg-machine-translation-page-status missing"],
 .page-actions-menu,
 #goog-gt-,
 #logo,
-.edit-page
+.edit-page,
+.mw-notification-area
 {
    display: none !important;
    visibility: hidden !important;
