@@ -1,29 +1,35 @@
 void async function LinkResolver() {
 
-    let relativeLinks = document.querySelectorAll('a[href^="/"],a[href^="./"]');
-    const relativeLinks_length = relativeLinks.length;
-    for (let i = 0; i < relativeLinks_length; i++) {
-      try {
+  let relativeLinks = document.querySelectorAll('a[href^="/"],a[href^="./"]');
+  const relativeLinks_length = relativeLinks.length;
+  for (let i = 0; i < relativeLinks_length; i++) {
+    try {
 
-        relativeLinks[i].setAttribute('href', relativeLinks[i].href);
+      relativeLinks[i].setAttribute('href', relativeLinks[i].href);
 
-      } catch (e) { continue; }
+    } catch (e) {
+      continue;
     }
-    let relativeSrc = document.querySelectorAll('[src^="/"],[src^="./"]');
-    const relativeSrc_length = relativeSrc.length;
-    for (let i = 0; i < relativeSrc_length; i++) {
-      try {
+  }
+  let relativeSrc = document.querySelectorAll('[src^="/"],[src^="./"]');
+  const relativeSrc_length = relativeSrc.length;
+  for (let i = 0; i < relativeSrc_length; i++) {
+    try {
 
-        relativeSrc[i].setAttribute('src', relativeSrc[i].src);
+      relativeSrc[i].setAttribute('src', relativeSrc[i].src);
 
-      } catch (e) { continue; }
+    } catch (e) {
+      continue;
     }
+  }
   const hostProxy = window.location.host;
   let hostList = [];
-  try{
+  try {
     JSON.parse(atob(document.currentScript.getAttribute('host-list')));
-  }catch(e){console.log(e);}
-  
+  } catch (e) {
+    console.log(e);
+  }
+
   const hostList_length = hostList.length;
   let hostListQuery = 'hostListQuery';
 
@@ -40,7 +46,9 @@ void async function LinkResolver() {
       for (let x = 0; x < href_list_length; x++) {
         try {
           href_list[x].href = href_list[x].href.replaceAll(hostList[i], hostProxy);
-        } catch (e) { continue; }
+        } catch (e) {
+          continue;
+        }
       }
     }
 
@@ -56,11 +64,11 @@ void async function LinkResolver() {
       for (let x = 0; x < src_list_length; x++) {
         try {
           src_list[x].src = src_list[x].src.replaceAll(hostList[i], hostProxy);
-        } catch (e) { continue; }
+        } catch (e) {
+          continue;
+        }
       }
     }
-
-
 
     hostListQuery = '[data-src*="wikipedia.org"]:not([data-src*="lenguapedia"])';
     for (let i = 0; i < hostList_length; i++) {
@@ -74,10 +82,11 @@ void async function LinkResolver() {
       for (let x = 0; x < data_src_list_length; x++) {
         try {
           data_src_list[x].setAttribute('data-src', data_src_list[x].getAttribute('data-src').replaceAll(hostList[i], hostProxy));
-        } catch (e) { continue; }
+        } catch (e) {
+          continue;
+        }
       }
     }
-
 
     hostListQuery = '[style="wikipedia.org"]:not([style*="lenguapedia"])';
     for (let i = 0; i < hostList_length; i++) {
@@ -92,46 +101,48 @@ void async function LinkResolver() {
         try {
           style_list[x].setAttribute('style', style_list[x].getAttribute('style').replaceAll('/' + hostList[i], '/' + hostProxy));
 
-        } catch (e) { continue; }
+        } catch (e) {
+          continue;
+        }
       }
     }
 
-    let defaultHosts=document.querySelectorAll(`[href^="https://"][href*="wikipedia.org"]:not([href*="lenguapedia"],[window-location-host]),[href^="https://"][href*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
-    let defaultHosts_length=defaultHosts.length;
-    for(let i=0;i<defaultHosts_length;i++){
-    let durl=defaultHosts[i].href;
-    durl=durl.split('/');
-    durl[2]=window.location.host;
-    defaultHosts[i].href=durl.join('/');
-    defaultHosts[i].setAttribute('window-location-host',window.location.host);
+    let defaultHosts = document.querySelectorAll(`[href^="https://"][href*="wikipedia.org"]:not([href*="lenguapedia"],[window-location-host]),[href^="https://"][href*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
+    let defaultHosts_length = defaultHosts.length;
+    for (let i = 0; i < defaultHosts_length; i++) {
+      let durl = defaultHosts[i].href;
+      durl = durl.split('/');
+      durl[2] = window.location.host;
+      defaultHosts[i].href = durl.join('/');
+      defaultHosts[i].setAttribute('window-location-host', window.location.host);
     }
 
-    defaultHosts=document.querySelectorAll(`[src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia"],[window-location-host]),[src^="https://"][src*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
-    defaultHosts_length=defaultHosts.length;
-    for(let i=0;i<defaultHosts_length;i++){
-    let durl=defaultHosts[i].src;
-    durl=durl.split('/');
-    durl[2]=window.location.host;
-    defaultHosts[i].src=durl.join('/');
-        defaultHosts[i].setAttribute('window-location-host',window.location.host);
+    defaultHosts = document.querySelectorAll(`[src^="https://"][src*="wikipedia.org"]:not([src*="lenguapedia"],[window-location-host]),[src^="https://"][src*="lenguapedia-en.vercel.app"]:not([window-location-host])`);
+    defaultHosts_length = defaultHosts.length;
+    for (let i = 0; i < defaultHosts_length; i++) {
+      let durl = defaultHosts[i].src;
+      durl = durl.split('/');
+      durl[2] = window.location.host;
+      defaultHosts[i].src = durl.join('/');
+      defaultHosts[i].setAttribute('window-location-host', window.location.host);
     }
 
-
-
-    
   }, 100);
-
-
 
   (async function fixMainCss() {
     let mainLink = document.querySelector('link[rel="stylesheet"][href*="load.php"]');
-    if (!mainLink) { return setTimeout(async function() { fixMainCss(); }, 200); }
-    if(!globalThis.nativeFetch){globalThis.nativeFetch=fetch;};
+    if (!mainLink) {
+      return setTimeout(async function() {
+        fixMainCss();
+      }, 200);
+    }
+    if (!globalThis.nativeFetch) {
+      globalThis.nativeFetch = fetch;
+    };
     let mainCss = await (await nativeFetch(mainLink.href)).text();
     let mainStyle = document.createElement('style');
     mainStyle.innerHTML = mainCss;
     document.head.appendChild(mainStyle);
   })?.();
-
 
 }?.();

@@ -8,7 +8,7 @@ import './import/redundant.js';
 import './import/fuzzy-fetch.js';*/
 
 void async function Main() {
-await import('/public/js/import/c-s-e.js');
+  await import('/public/js/import/c-s-e.js');
   await import('/public/js/import/sleep.js');
   await import('/public/js/import/utils.js');
   await import('/public/js/import/web-gpt-3.js');
@@ -16,10 +16,6 @@ await import('/public/js/import/c-s-e.js');
   await import('/public/js/import/snippets.js');
   await import('/public/js/import/redundant.js');
   await import('/public/js/import/fuzzy-fetch.js');
-
-
-
-
 
   // Create a Unique UUID for user chat history
   function createUUID() {
@@ -52,11 +48,10 @@ await import('/public/js/import/c-s-e.js');
     };
   };
 
-
   // wait until the whole message is done before printing;
   let sendMessageSync = async (username, content, messageListener) => {
-    if((content.split(' ').length>6.9)&&((content.length>69)||(Math.floor(Math.random() * 100)>69))){
-    content = content + ". Let's work this out in a step by step way to be sure we have the right answer";
+    if ((content.split(' ').length > 6.9) && ((content.length > 69) || (Math.floor(Math.random() * 100) > 69))) {
+      content = content + ". Let's work this out in a step by step way to be sure we have the right answer";
     }
     let data = {
       username,
@@ -64,17 +59,15 @@ await import('/public/js/import/c-s-e.js');
       _stream: false
     };
 
-
-
     let json = tryJSONRes(await postChat(data));
 
-    let mres=json?.response||json;
-    try{
-     mres = modifyResponse(mres);
-    }catch(e){
+    let mres = json?.response || json;
+    try {
+      mres = modifyResponse(mres);
+    } catch (e) {
       mres = e.message;
     }
-    
+
     let res_words = mres.split(' ');
     let res_words_length = res_words.length;
     for (let i = 0; i < res_words_length; i++) {
@@ -83,7 +76,6 @@ await import('/public/js/import/c-s-e.js');
     }
     await formatCode();
     await formatSnip();
-
 
     return mres;
   }
@@ -97,27 +89,22 @@ await import('/public/js/import/c-s-e.js');
 
         tokens.push('"' + textList[i] + '"');
 
-      } catch (e) { continue; }
+      } catch (e) {
+        continue;
+      }
     }
 
     return tokens.join(' OR ');
   }
 
-
-
-
   let analyzeMessageSync = async (username, content, messageListener) => {
     let prompt = content;
     /* content = 'Please provide the exact tokens to enter into a google search bar in order to respond to the prompt {' + content + '}';*/
-    let data={
+    let data = {
       username,
       content,
       _stream: false
     };
-
-  
-
-
 
     let sends = [];
     sends.push(parallelCSESends(username, prompt));
@@ -125,7 +112,11 @@ await import('/public/js/import/c-s-e.js');
     await sleep(100);
 
     content = "Using the additional information, to the best of your ability, answer the following. \"" + prompt + ".\" .";
-    data={ username, content, _stream: false };
+    data = {
+      username,
+      content,
+      _stream: false
+    };
     let json_answer = tryJSONRes(await postChat(data));
     let part1 = json_answer;
     part1 = part1.split(',');
@@ -146,7 +137,11 @@ await import('/public/js/import/c-s-e.js');
     part1 = part1.join('');*/
     content = "Please expand upon your previous response and make any revisions if necessary";
 
-    let elab = { username, content, _stream: false };
+    let elab = {
+      username,
+      content,
+      _stream: false
+    };
     let json_elab = tryJSONRes(await postChat(elab));
     let part2 = json_elab.split('.');
     const part2_length = part2.length;
@@ -173,7 +168,9 @@ await import('/public/js/import/c-s-e.js');
 
         }
 
-      } catch (e) { continue; }
+      } catch (e) {
+        continue;
+      }
     }
     full_msg[0] = full_msg[0].toUpperCase();
     full_msg = full_msg.join('')
@@ -181,7 +178,7 @@ await import('/public/js/import/c-s-e.js');
       .replaceAll('.,', '.')
       .replaceAll('..', '.');
     full_msg = decodeSnippets(full_msg);
-  
+
     document.querySelector('[thinking]')?.removeAttribute('thinking');
     let res_words = full_msg.split(' ');
     let res_words_length = res_words.length;
@@ -196,13 +193,14 @@ await import('/public/js/import/c-s-e.js');
 
   // Prepare the page to handle interaction
 
-
   document.addEventListener('load', firstMSG);
 
   firstMSG();
 
   async function firstMSG() {
-    if (document.fmg) { return; }
+    if (document.fmg) {
+      return;
+    }
     document.fmg = true;
     await sleep(200);
     fixHeight();
@@ -258,15 +256,16 @@ await import('/public/js/import/c-s-e.js');
           msgEl.setAttribute('thinking', 'Sëârćhįng');
           assistantEls.messages.scrollTop = assistantEls.messages.scrollHeight;
           processing();
-          await Promise.race([ sleep(30000),
+          await Promise.race([sleep(30000),
             analyzeMessageSync(sessionUsername, content, (message) => {
-            response += message;
-            let chunkEl = document.createElement('span');
-            chunkEl.classList.add('chunk');
-            chunkEl.innerText = message;
-            assistantEls.content.appendChild(chunkEl);
-            assistantEls.messages.scrollTop = assistantEls.messages.scrollHeight;
-          })]);
+              response += message;
+              let chunkEl = document.createElement('span');
+              chunkEl.classList.add('chunk');
+              chunkEl.innerText = message;
+              assistantEls.content.appendChild(chunkEl);
+              assistantEls.messages.scrollTop = assistantEls.messages.scrollHeight;
+            })
+          ]);
           msgEl.removeAttribute('thinking');
           form.removeAttribute('disabled');
         }
@@ -302,40 +301,40 @@ await import('/public/js/import/c-s-e.js');
     window.visualViewport.addEventListener('resize', resizeHandler);
   }
 
-
-
-
   window.mobile = (navigator.userAgent.toLowerCase().indexOf('mobile') > -1);
 
   setInterval(fixHeight, 500);
-  function fixHeight() {
 
+  function fixHeight() {
 
     let chatWindow = document.querySelector('div.chat');
     if ((document.body.clientHeight > document.body.clientWidth) || (window.top != window)) {
 
-      if (chatWindow.style.maxWidth != '100vw') { chatWindow.style.maxWidth = '100vw'; }
+      if (chatWindow.style.maxWidth != '100vw') {
+        chatWindow.style.maxWidth = '100vw';
+      }
 
     } else {
 
-
-      if ((chatWindow.style.maxWidth != '90vw') && (!window.mobile)) { chatWindow.style.maxWidth = '90vw'; }
+      if ((chatWindow.style.maxWidth != '90vw') && (!window.mobile)) {
+        chatWindow.style.maxWidth = '90vw';
+      }
 
     }
 
-
-
-
   }
 
-  void function SendPrimer() {
+  void
+  function SendPrimer() {
 
     document.addEventListener('load', prime);
 
     prime();
 
     function prime() {
-      if (document.primed) { return; }
+      if (document.primed) {
+        return;
+      }
       document.primed = true;
       let botName = document.querySelector('h3').textContent.trim();
       let nameChange = '';
@@ -352,53 +351,44 @@ await import('/public/js/import/c-s-e.js');
 
         (primer + 'I have some additional parameters that I would like you to follow for the remainder of the chat. I would like for you to refer to me as Individual rather than User unless I give you another name. I will refer to Autocode.com as the Matrix and I would like you to do the same. I would like you to behave as if these specification had always been true and not based on my requesting it. So please do not remind me that I requested these things.'), Ø);
 
-
     }
   }?.();
 
-
-
-
- 
   void async function LoadGoogleApi() {
 
-     LoadCSE('a1e5f54f854494cd5');
+    LoadCSE('a1e5f54f854494cd5');
 
   }?.();
 
-
   async function gapiFetch(query) {
 
-    return cseFetchQuery(query,'a1e5f54f854494cd5');
-    
+    return cseFetchQuery(query, 'a1e5f54f854494cd5');
+
   }
-
-
 
   async function gapiFetchDeep(query) {
 
-    return cseFetchQueryDeep(query,'a1e5f54f854494cd5');
-    
-  }
+    return cseFetchQueryDeep(query, 'a1e5f54f854494cd5');
 
+  }
 
   void async function LoadShortCSE() {
 
     LoadCSE('7f6418896a2455016');
-    
+
   }?.();
 
+  function cseFetch(query) {
 
- function cseFetch(query){
+    return cseFetchQuery(query, '7f6418896a2455016');
 
-return cseFetchQuery(query,'7f6418896a2455016');
-   
- }
- function cseFetchDeep(query){
+  }
 
-return cseFetchQueryDeep(query,'7f6418896a2455016');
-   
- }
+  function cseFetchDeep(query) {
+
+    return cseFetchQueryDeep(query, '7f6418896a2455016');
+
+  }
 
   async function parallelCSESends(username, query) {
     const options = {
@@ -411,38 +401,48 @@ return cseFetchQueryDeep(query,'7f6418896a2455016');
     let webscrape = [];
     let cseProm = cseFetchDeep(query);
     let googleProm = gapiFetchDeep(query);
-    await Promise.all([cseProm,googleProm]);
+    await Promise.all([cseProm, googleProm]);
     cseProm = await cseProm;
     googleProm = await googleProm;
-   
+
     webscrape = cseProm.concat(googleProm);
-  
+
     console.log(webscrape);
-    cseProm=cseProm.reverse();
-    googleProm=googleProm.reverse();
-    let ws=[];
-    const ws_length=Math.max(cseProm.length,googleProm.length);
-    for(let i=0;i<ws_length;i++){
+    cseProm = cseProm.reverse();
+    googleProm = googleProm.reverse();
+    let ws = [];
+    const ws_length = Math.max(cseProm.length, googleProm.length);
+    for (let i = 0; i < ws_length; i++) {
       let a = cseProm?.[i];
-      if(a&&!ws.includes(a)){ws.push(a);}
+      if (a && !ws.includes(a)) {
+        ws.push(a);
+      }
       let b = googleProm?.[i];
-      if(b&&!ws.includes(b)){ws.push(b);}
+      if (b && !ws.includes(b)) {
+        ws.push(b);
+      }
     }
-console.log(ws);    
-let feeder = [];
-        let content = 'Additional information (' + ws.join('\r\n') + ')';
+    console.log(ws);
+    let feeder = [];
+    let content = 'Additional information (' + ws.join('\r\n') + ')';
 
-        console.log('content length2: ' + encodeURIComponent(content).length);
-    
-        let data = { username, content, _stream: false };
-let pd=postChat(data);
-    content = 'Additional information (' + ((await cseFetch(query)).join('\r\n') + (await gapiFetch(query)).join('\r\n')).slice(0,1000) +')';
-    data = { username, content, _stream: false };
-        feeder.push(Promise.race([Promise.all([pd,postChat(data)]), sleep(10000)]));
-   
+    console.log('content length2: ' + encodeURIComponent(content).length);
 
+    let data = {
+      username,
+      content,
+      _stream: false
+    };
+    let pd = postChat(data);
+    content = 'Additional information (' + ((await cseFetch(query)).join('\r\n') + (await gapiFetch(query)).join('\r\n')).slice(0, 1000) + ')';
+    data = {
+      username,
+      content,
+      _stream: false
+    };
+    feeder.push(Promise.race([Promise.all([pd, postChat(data)]), sleep(10000)]));
 
-    await Promise.race([Promise.all(feeder),sleep(30000)]);
+    await Promise.race([Promise.all(feeder), sleep(30000)]);
     await sleep(1000);
     return 0;
   }
@@ -463,10 +463,5 @@ let pd=postChat(data);
     await sleep(2000);
     document.querySelector('[thinking]')?.setAttribute('thinking', 'R̸̛̠̼͎̮̹̉̄͂̒ͅe̷͖̮̕͜f̴̧̼͖͍̂͋̅̊l̸̮̬̫͕̣͕̾̎e̷̞͙̘͌̌̈́͑͋c̸̫̈ͅt̵̨͓͉̥̆̓̄̎͂͜ͅí̵̥̟̙͍̐̋͊͜n̸͉̟̱̆g̶̝̲͍̫̗͈̒̾̎');
   }
-
-
-
-
-
 
 }?.();
