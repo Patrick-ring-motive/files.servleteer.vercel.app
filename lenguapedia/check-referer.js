@@ -1,4 +1,5 @@
 void
+
 function checkReferer() {
 
   let referer = document.querySelector('http-header[key="referer"]');
