@@ -2,58 +2,62 @@
   "headers": [
     {
       "source": "/(.*).jsonp",
-      "headers" : [
+      "headers": [
         {
-          "key" : "Content-Type",
-          "value" : "text/javascript"
+          "key": "Content-Type",
+          "value": "text/javascript"
         },
         {
-          "key" : "Access-Control-Allow-Origin",
-          "value" : "*"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
-    },{
+    },
+    {
       "source": "/(.*).jsn",
-      "headers" : [
+      "headers": [
         {
-          "key" : "Content-Type",
-          "value" : "application/json"
+          "key": "Content-Type",
+          "value": "application/json"
         }
       ]
-    },{
+    },
+    {
       "source": "/(.*).js",
-      "headers" : [
+      "headers": [
         {
-          "key" : "Content-Type",
-          "value" : "text/javascript; charset=utf-8"
+          "key": "Content-Type",
+          "value": "text/javascript; charset=utf-8"
         },
         {
-          "key" : "Access-Control-Allow-Origin",
-          "value" : "*"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
-    },{
+    },
+    {
       "source": "/(.*).css",
-      "headers" : [
+      "headers": [
         {
-          "key" : "Content-Type",
-          "value" : "text/css"
+          "key": "Content-Type",
+          "value": "text/css"
         },
         {
-          "key" : "Access-Control-Allow-Origin",
-          "value" : "*"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
-    },{
+    },
+    {
       "source": "/(.*).html",
-      "headers" : [
+      "headers": [
         {
-          "key" : "Content-Type",
-          "value" : "text/html"
+          "key": "Content-Type",
+          "value": "text/html"
         },
         {
-          "key" : "Access-Control-Allow-Origin",
-          "value" : "*"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }
